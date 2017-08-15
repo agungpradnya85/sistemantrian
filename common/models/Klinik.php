@@ -29,8 +29,7 @@ class Klinik extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'kode_klinik', 'nama_klinik'], 'required'],
-            [['id'], 'integer'],
+            [['kode_klinik', 'nama_klinik'], 'required'],
             [['kode_klinik'], 'string', 'max' => 3],
             [['nama_klinik'], 'string', 'max' => 30],
         ];

@@ -29,7 +29,7 @@ class ReservasiController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            /*
+            
             // acess control role
             'access' => [
                 'class' => AccessControl::className(),
@@ -41,22 +41,22 @@ class ReservasiController extends Controller
                 'rules' => [
                     // allow authenticated users
                     
-                    // only role admin
+                    // only role member
                     [
                         'actions' => ['index','create','update','view','poli','show'],
                         'allow' => true,
-                        'roles' => ['admin'],
+                        'roles' => ['member'],
                     ],
                     
                     // only user member
-                    [
+                    /*[
                         'actions' => ['show'],
                         'allow' => true,
                         'roles' => ['member'],
-                    ],
+                    ],*/
                     // everything else is denied
                 ],
-            ],*/
+            ],
 
         ];
     }
@@ -154,23 +154,31 @@ class ReservasiController extends Controller
         }
     }
     
+    // menampilkan informasi antrian di 
     public function actionPoli()
     {
+         
+
+        //return $this->render('index', ['model' => $model]);
+        
         if(Yii::$app->request->post()) {
             $id_klinik = Yii::$app->request->post('klinik');
             $id_user = Yii::$app->user->identity->id;
+            $data_klinik = \common\models\Klinik::findOne($id_klinik);
             $queryCount = "SELECT count(*) FROM `klinik_map` WHERE id_klinik=:id_klinik and tanggal=:date";
             $count = Yii::$app->db->createCommand($queryCount, [
                         ':id_klinik' => $id_klinik,
                         ':date' => date('Y-m-d')
                     ])
                     ->queryScalar();
+            $next_queue = $count + 1;
             Yii::$app->db->createCommand()
                     ->insert('klinik_map', [
                         'id_klinik' => $id_klinik,
                         'tanggal' => date('Y-m-d'),
-                        'no_antrian' => ($count + 1),
+                        'no_antrian' => $data_klinik->kode_klinik.''.$next_queue,
                         'id_pasien' => $id_user,
+                        'time_exam' => $this->showTimeExamination($next_queue),
                     ])->execute();
             $id = Yii::$app->db->getLastInsertID();
             return $this->redirect(['show', 'id' => $id]);
@@ -178,7 +186,22 @@ class ReservasiController extends Controller
         return $this->render('menu_klinik');
     }
     
-    public function actionShowAntrian()
+    protected function showTimeExamination($antrian)
+    {
+        if($antrian >= 1 && $antrian <= 12)
+        {
+            $timeExamination = '08.00 - 10.00';
+        }else if($antrian >= 13 && $antrian <= 24)
+        {
+            $timeExamination = '10.00 - 12.00';
+        }else if($antrian >= 25 && $antrian <= 36)
+        {
+            $timeExamination = '12.00 - 14.00';
+        }
+        return $timeExamination;
+    }
+
+        public function actionShowAntrian()
     {
         if(Yii::$app->request->post()) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -233,7 +256,7 @@ class ReservasiController extends Controller
         }
     }
 
-
+    // Ini Id yang menunjukkan id klinik map di database
     public function actionShow($id)
     {
         $queryCount = "SELECT * FROM `klinik_map` WHERE id=:id";
@@ -242,4 +265,6 @@ class ReservasiController extends Controller
                     ])->queryOne();
         return $this->render('show_antrian', ['model' => $model]);
     }
+    
+    //public function action
 }

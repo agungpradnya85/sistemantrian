@@ -9,5 +9,6 @@
 <div style="text-align: center; font-weight: bold; font-size: 75px;">
     <div>No Antrian</div>
     <div><?= $model['no_antrian']; ?></div>
+    <div><?= $model['time_exam']; ?></div>
 </div>
  
