@@ -3,19 +3,18 @@
 
 use yii\bootstrap\BootstrapPluginAsset;
 use yii\web\JqueryAsset;
-
+use yii\helpers\Html;
+use yii\helpers\Url;
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-use yii\helpers\Html;
+$this->title = 'Reservasi'
 ?>
+<h1><?= Html::encode($this->title) ?></h1>
 <?= Html::beginForm(); ?>
-<div class="form-group">
-     <label>Halaman Reservasi</label>
-</div>
 <div class="form-group">
     <label>Nama Klinik</label><br><?= Html::dropDownList('klinik', null, [],[ 'id' => 'select-klinik', 'style' => 'width:100%']); ?>
 </div>
@@ -31,13 +30,9 @@ use yii\helpers\Html;
 <?= Html::endForm(); ?>
 
 <?php
-$search_klinik_url = \yii\helpers\Url::to(['/klinik/search-klinik']);
-$queue_url = \yii\helpers\Url::to(['/antrian/show-antrian']);
-   
-    
-    
-    
-    
+$search_klinik_url = Url::to(['/klinik/search-klinik']);
+$queue_url = Url::to(['/antrian/show-antrian']);
+
 $js =<<<JS
 jQuery("#select-klinik").select2({
     placeholder : "-",
@@ -93,7 +88,6 @@ $('#select-klinik').on("select2:close", function(e) {
     });
 });
 JS;
-
 
 $this->registerJsFile(
     'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
