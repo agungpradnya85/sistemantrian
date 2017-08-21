@@ -11,7 +11,7 @@ use yii\helpers\Url;
  * and open the template in the editor.
  */
 
-$this->title = 'Reservasi'
+$this->title = 'Halaman Reservasi Antrian'
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
 <?= Html::beginForm(); ?>
@@ -22,10 +22,10 @@ $this->title = 'Reservasi'
     <label>Antrian Terakhir : </label><span id="latest_queue"></span>
 </div>
 <div class="form-group">
-    <label>Antrian terpanggil : </label><span id="current_queue"></span>
+    <label>Antrian Yang Terdaftar Terakhir : </label><span id="current_queue"></span>
 </div>
 <div class="form-group">
-    <input type="submit" value="Next">
+    <input type="submit" value="Ambil No Antrian">
 </div>
 <?= Html::endForm(); ?>
 

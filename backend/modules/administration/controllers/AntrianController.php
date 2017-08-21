@@ -90,13 +90,14 @@ class AntrianController extends \yii\web\Controller
      */
     public function actionPanggilAntrian($id)
     {
+        $klinik = \common\models\Klinik::findOne($id);
         $query = 'select * from klinik_map WHERE tanggal=:tgl AND id_klinik=:id_klinik';
         
         $model = Yii::$app->db->createCommand($query, [
             ':tgl' => date('Y-m-d'),
             ':id_klinik' => $id,
             ])->queryAll();
-        return $this->render('panggil_antrian', ['model' => $model]);
+        return $this->render('panggil_antrian', ['model' => $model,'klinik' => $klinik]);
     }
     
     /*

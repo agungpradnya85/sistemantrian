@@ -10,7 +10,7 @@ $this->title = 'Dashboard Administrator';
     <div class="body-content">
         <div class="row">
             <div class="col-lg-4">
-                <?= Html::a('Kelola Antrian', ['/administration/antrian/index']); ?>
+                <?= Html::a('Kelola Poli', ['/administration/antrian/index']); ?>
             </div>
         </div>
     </div>

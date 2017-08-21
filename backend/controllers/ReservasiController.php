@@ -43,7 +43,7 @@ class ReservasiController extends Controller
                     
                     // only role member
                     [
-                        'actions' => ['index','create','update','view','poli','show'],
+                        'actions' => ['index','create','update','view','poli','show','cancel-reservation-member'],
                         'allow' => true,
                         'roles' => ['member'],
                     ],
@@ -266,5 +266,24 @@ class ReservasiController extends Controller
         return $this->render('show_antrian', ['model' => $model]);
     }
     
-    //public function action
+    //$id adalah id klinik map
+     public function actionCancelReservationMember($id)
+    {
+        //if(Yii::$app->request->post()) {
+            
+
+            $id_user = Yii::$app->user -> identity->id;
+            //$id_klinik = Yii::$app->request->post('id_klinik');
+            //$id = Yii::$app->request->post('id');
+            $query = "UPDATE klinik_map SET [[status]] =:status WHERE id=:id AND id_pasien=:id_user";
+            Yii::$app->db->createCommand($query, [
+                    ':status' => 0,
+                    ':id_user' => $id_user,
+                    //':id_klinik' => $id_klinik,
+                    ':id' => $id,
+                ])
+		->execute();
+            return $this -> redirect(['/site/index']);
+        //}
+    }
 }
