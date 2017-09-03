@@ -48,6 +48,7 @@ class ReservationController extends Controller
             //'index' => ['GET', 'HEAD'],
             //'view' => ['GET', 'HEAD'],
             'create' => ['POST'],
+            'cancel-reservation' => ['POST'],
             //'show' => ['POST'],
             //'delete' => ['DELETE'],
         ];
@@ -82,6 +83,7 @@ class ReservationController extends Controller
                 ])
                 ->queryScalar();
         $next_queue = $count + 1;
+        $timeExamination = $this->showTimeExamination($next_queue);
        
         Yii::$app->db->createCommand()
                 ->insert('klinik_map', [
@@ -89,13 +91,15 @@ class ReservationController extends Controller
                     'tanggal' => date('Y-m-d'),
                     'no_antrian' => $data_klinik->kode_klinik.''.$next_queue,
                     'id_pasien' => $id_user,
-                    'time_exam' => $this->showTimeExamination($next_queue),
+                    'time_exam' => $timeExamination,
                 ])->execute();
 
         return [
             'no_antrian' => $data_klinik->kode_klinik.$next_queue,
             'id_antrian' => Yii::$app->db->getLastInsertID(),
             'id_klinik' => $id_klinik,
+            'nama_klinik' => $data_klinik->nama_klinik,
+            'time_exam' => $timeExamination,
             'id_user' => $id_user
         ];
 

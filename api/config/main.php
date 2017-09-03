@@ -69,6 +69,7 @@ return [
                     ],
                     'extraPatterns' => [
                         'POST create' => 'create',
+                        'POST cancel-reservation' => 'cancel-reservation',
                     ],
                 ],
                 [
