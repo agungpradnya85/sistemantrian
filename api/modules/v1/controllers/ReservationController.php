@@ -67,7 +67,15 @@ class ReservationController extends Controller
         }else if($antrian >= 25 && $antrian <= 36)
         {
             $timeExamination = '12.00 - 14.00';
+        }else if($antrian >= 37 && $antrian <= 48)
+        {
+            $timeExamination = '14.00 - 16.00';
+        }else if($antrian >= 49 && $antrian <= 60)
+        {
+            $timeExamination = '16.00 - 18.00';
         }
+        
+        
         return $timeExamination;
     }
 
