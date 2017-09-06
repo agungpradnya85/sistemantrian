@@ -1,0 +1,212 @@
+a:11:{s:6:"config";a:5:{s:10:"phpVersion";s:5:"7.1.4";s:10:"yiiVersion";s:6:"2.0.12";s:11:"application";a:8:{s:3:"yii";s:6:"2.0.12";s:4:"name";s:14:"My Application";s:7:"version";s:3:"1.0";s:8:"language";s:5:"id-ID";s:14:"sourceLanguage";s:5:"en-US";s:7:"charset";s:5:"UTF-8";s:3:"env";s:3:"dev";s:5:"debug";b:1;}s:3:"php";a:5:{s:7:"version";s:5:"7.1.4";s:6:"xdebug";b:0;s:3:"apc";b:0;s:8:"memcache";b:0;s:9:"memcached";b:0;}s:10:"extensions";a:5:{s:24:"yiisoft/yii2-swiftmailer";a:3:{s:4:"name";s:24:"yiisoft/yii2-swiftmailer";s:7:"version";s:7:"2.0.7.0";s:5:"alias";a:1:{s:16:"@yii/swiftmailer";s:56:"C:\xampp\htdocs\advanced\vendor/yiisoft/yii2-swiftmailer";}}s:22:"yiisoft/yii2-bootstrap";a:3:{s:4:"name";s:22:"yiisoft/yii2-bootstrap";s:7:"version";s:7:"2.0.6.0";s:5:"alias";a:1:{s:14:"@yii/bootstrap";s:54:"C:\xampp\htdocs\advanced\vendor/yiisoft/yii2-bootstrap";}}s:18:"yiisoft/yii2-debug";a:3:{s:4:"name";s:18:"yiisoft/yii2-debug";s:7:"version";s:7:"2.0.9.0";s:5:"alias";a:1:{s:10:"@yii/debug";s:50:"C:\xampp\htdocs\advanced\vendor/yiisoft/yii2-debug";}}s:16:"yiisoft/yii2-gii";a:3:{s:4:"name";s:16:"yiisoft/yii2-gii";s:7:"version";s:7:"2.0.5.0";s:5:"alias";a:1:{s:8:"@yii/gii";s:48:"C:\xampp\htdocs\advanced\vendor/yiisoft/yii2-gii";}}s:18:"yiisoft/yii2-faker";a:3:{s:4:"name";s:18:"yiisoft/yii2-faker";s:7:"version";s:7:"2.0.3.0";s:5:"alias";a:1:{s:10:"@yii/faker";s:50:"C:\xampp\htdocs\advanced\vendor/yiisoft/yii2-faker";}}}}s:7:"request";a:14:{s:7:"flashes";a:0:{}s:10:"statusCode";i:200;s:14:"requestHeaders";a:6:{s:12:"content-type";s:48:"application/x-www-form-urlencoded; charset=UTF-8";s:10:"user-agent";s:73:"Dalvik/2.1.0 (Linux; U; Android 7.0; Android SDK built for x86 Build/NYC)";s:4:"host";s:8:"10.0.2.2";s:10:"connection";s:10:"Keep-Alive";s:15:"accept-encoding";s:4:"gzip";s:14:"content-length";s:2:"12";}s:15:"responseHeaders";a:2:{s:12:"X-Powered-By";s:9:"PHP/7.1.4";s:12:"Content-Type";s:31:"application/json; charset=UTF-8";}s:5:"route";s:21:"v1/reservation/create";s:6:"action";s:64:"api\modules\v1\controllers\ReservationController::actionCreate()";s:12:"actionParams";a:0:{}s:11:"requestBody";a:3:{s:12:"Content Type";s:48:"application/x-www-form-urlencoded; charset=UTF-8";s:3:"Raw";s:12:"id_klinik=1&";s:17:"Decoded to Params";a:1:{s:9:"id_klinik";s:1:"1";}}s:6:"SERVER";a:41:{s:7:"MIBDIRS";s:24:"C:/xampp/php/extras/mibs";s:10:"MYSQL_HOME";s:16:"\xampp\mysql\bin";s:12:"OPENSSL_CONF";s:31:"C:/xampp/apache/bin/openssl.cnf";s:20:"PHP_PEAR_SYSCONF_DIR";s:10:"\xampp\php";s:5:"PHPRC";s:10:"\xampp\php";s:3:"TMP";s:10:"\xampp\tmp";s:12:"CONTENT_TYPE";s:48:"application/x-www-form-urlencoded; charset=UTF-8";s:15:"HTTP_USER_AGENT";s:73:"Dalvik/2.1.0 (Linux; U; Android 7.0; Android SDK built for x86 Build/NYC)";s:9:"HTTP_HOST";s:8:"10.0.2.2";s:15:"HTTP_CONNECTION";s:10:"Keep-Alive";s:20:"HTTP_ACCEPT_ENCODING";s:4:"gzip";s:14:"CONTENT_LENGTH";s:2:"12";s:4:"PATH";s:887:"C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Acer ProShield\;C:\Program Files\Acer ProShield\x86;C:\Program Files (x86)\Skype\Phone\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Users\ACER\AppData\Local\Microsoft\WindowsApps;C:\Users\ACER\AppData\Roaming\Composer\vendor\bin";s:10:"SystemRoot";s:10:"C:\Windows";s:7:"COMSPEC";s:27:"C:\Windows\system32\cmd.exe";s:7:"PATHEXT";s:57:".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY";s:6:"WINDIR";s:10:"C:\Windows";s:16:"SERVER_SIGNATURE";s:93:"<address>Apache/2.4.25 (Win32) OpenSSL/1.0.2j PHP/7.1.4 Server at 10.0.2.2 Port 80</address>
+";s:15:"SERVER_SOFTWARE";s:46:"Apache/2.4.25 (Win32) OpenSSL/1.0.2j PHP/7.1.4";s:11:"SERVER_NAME";s:8:"10.0.2.2";s:11:"SERVER_ADDR";s:9:"127.0.0.1";s:11:"SERVER_PORT";s:2:"80";s:11:"REMOTE_ADDR";s:9:"127.0.0.1";s:13:"DOCUMENT_ROOT";s:15:"C:/xampp/htdocs";s:14:"REQUEST_SCHEME";s:4:"http";s:14:"CONTEXT_PREFIX";s:0:"";s:21:"CONTEXT_DOCUMENT_ROOT";s:15:"C:/xampp/htdocs";s:12:"SERVER_ADMIN";s:20:"postmaster@localhost";s:15:"SCRIPT_FILENAME";s:42:"C:/xampp/htdocs/advanced/api/web/index.php";s:11:"REMOTE_PORT";s:5:"54395";s:17:"GATEWAY_INTERFACE";s:7:"CGI/1.1";s:15:"SERVER_PROTOCOL";s:8:"HTTP/1.1";s:14:"REQUEST_METHOD";s:4:"POST";s:12:"QUERY_STRING";s:45:"access-token=2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG";s:11:"REQUEST_URI";s:96:"/advanced/api/web/index.php/v1/reservations/create?access-token=2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG";s:11:"SCRIPT_NAME";s:27:"/advanced/api/web/index.php";s:9:"PATH_INFO";s:23:"/v1/reservations/create";s:15:"PATH_TRANSLATED";s:38:"C:\xampp\htdocs\v1\reservations\create";s:8:"PHP_SELF";s:50:"/advanced/api/web/index.php/v1/reservations/create";s:18:"REQUEST_TIME_FLOAT";d:1504488694.881;s:12:"REQUEST_TIME";i:1504488694;}s:3:"GET";a:1:{s:12:"access-token";s:32:"2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG";}s:4:"POST";a:1:{s:9:"id_klinik";s:1:"1";}s:6:"COOKIE";a:0:{}s:5:"FILES";a:0:{}s:7:"SESSION";a:0:{}}s:3:"log";a:1:{s:8:"messages";a:22:{i:0;a:6:{i:0;s:33:"Bootstrap with yii\log\Dispatcher";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1504488694.912471;i:4;a:0:{}i:5;i:2003984;}i:1;a:6:{i:0;s:21:"Loading module: debug";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1504488694.912495;i:4;a:0:{}i:5;i:2004792;}i:2;a:6:{i:0;s:44:"Bootstrap with yii\debug\Module::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1504488694.92094;i:4;a:0:{}i:5;i:2311448;}i:3;a:6:{i:0;s:19:"Loading module: gii";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1504488694.927346;i:4;a:0:{}i:5;i:2673776;}i:4;a:6:{i:0;s:42:"Bootstrap with yii\gii\Module::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1504488694.92775;i:4;a:0:{}i:5;i:2695528;}i:15;a:6:{i:0;s:40:"Route requested: 'v1/reservation/create'";i:1;i:8;i:2;s:34:"yii\web\Application::handleRequest";i:3;d:1504488694.929137;i:4;a:0:{}i:5;i:2823600;}i:16;a:6:{i:0;s:18:"Loading module: v1";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1504488694.929146;i:4;a:0:{}i:5;i:2824792;}i:17;a:6:{i:0;s:35:"Route to run: v1/reservation/create";i:1;i:8;i:2;s:30:"yii\base\Controller::runAction";i:3;d:1504488694.954198;i:4;a:0:{}i:5;i:3011688;}i:18;a:6:{i:0;s:64:"Opening DB connection: mysql:host=localhost;dbname=antrianonline";i:1;i:4;i:2;s:23:"yii\db\Connection::open";i:3;d:1504488694.984279;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4498600;}i:21;a:6:{i:0;s:92:"SELECT * FROM `user` WHERE (`auth_key`='2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG') AND (`status`=10)";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1504488694.988539;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4512768;}i:24;a:6:{i:0;s:29:"SHOW FULL COLUMNS FROM `user`";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1504488694.98992;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4548384;}i:27;a:6:{i:0;s:595:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'user' AND kcu.table_name = 'user'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.019431;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4572816;}i:30;a:6:{i:0;s:55:"User '3' logged in from 127.0.0.1. Session not enabled.";i:1;i:4;i:2;s:19:"yii\web\User::login";i:3;d:1504488695.020912;i:4;a:0:{}i:5;i:4571088;}i:31;a:6:{i:0;s:65:"Rate limit skipped: "user" does not implement RateLimitInterface.";i:1;i:4;i:2;s:37:"yii\filters\RateLimiter::beforeAction";i:3;d:1504488695.020974;i:4;a:0:{}i:5;i:4571112;}i:32;a:6:{i:0;s:80:"Running action: api\modules\v1\controllers\ReservationController::actionCreate()";i:1;i:8;i:2;s:36:"yii\base\InlineAction::runWithParams";i:3;d:1504488695.020998;i:4;a:0:{}i:5;i:4570248;}i:33;a:6:{i:0;s:31:"SHOW FULL COLUMNS FROM `klinik`";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.021638;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4591088;}i:36;a:6:{i:0;s:599:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik' AND kcu.table_name = 'klinik'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.049555;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4600376;}i:39;a:6:{i:0;s:37:"SELECT * FROM `klinik` WHERE `id`='1'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.051413;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4601656;}i:42;a:6:{i:0;s:78:"SELECT count(*) FROM `klinik_map` WHERE id_klinik='1' and tanggal='2017-09-04'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.053559;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:92;s:8:"function";s:11:"queryScalar";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4605080;}i:45;a:6:{i:0;s:35:"SHOW FULL COLUMNS FROM `klinik_map`";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.057324;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4609320;}i:48;a:6:{i:0;s:607:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik_map' AND kcu.table_name = 'klinik_map'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.081911;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4620272;}i:51;a:6:{i:0;s:140:"INSERT INTO `klinik_map` (`id_klinik`, `tanggal`, `no_antrian`, `id_pasien`, `time_exam`) VALUES (1, '2017-09-04', 'A1', 3, '08.00 - 10.00')";i:1;i:4;i:2;s:23:"yii\db\Command::execute";i:3;d:1504488695.083068;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:103;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4621944;}}}s:9:"profiling";a:3:{s:6:"memory";i:4736808;s:4:"time";d:0.2078230381011963;s:8:"messages";a:22:{i:19;a:6:{i:0;s:64:"Opening DB connection: mysql:host=localhost;dbname=antrianonline";i:1;i:80;i:2;s:23:"yii\db\Connection::open";i:3;d:1504488694.984312;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4499416;}i:20;a:6:{i:0;s:64:"Opening DB connection: mysql:host=localhost;dbname=antrianonline";i:1;i:96;i:2;s:23:"yii\db\Connection::open";i:3;d:1504488694.988478;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4513328;}i:22;a:6:{i:0;s:92:"SELECT * FROM `user` WHERE (`auth_key`='2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG') AND (`status`=10)";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488694.988579;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4513824;}i:23;a:6:{i:0;s:92:"SELECT * FROM `user` WHERE (`auth_key`='2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG') AND (`status`=10)";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488694.989098;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4516488;}i:25;a:6:{i:0;s:29:"SHOW FULL COLUMNS FROM `user`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488694.989951;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4549408;}i:26;a:6:{i:0;s:29:"SHOW FULL COLUMNS FROM `user`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.018231;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4561296;}i:28;a:6:{i:0;s:595:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'user' AND kcu.table_name = 'user'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.01948;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4574960;}i:29;a:6:{i:0;s:595:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'user' AND kcu.table_name = 'user'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.020391;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4576048;}i:34;a:6:{i:0;s:31:"SHOW FULL COLUMNS FROM `klinik`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.021679;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4592112;}i:35;a:6:{i:0;s:31:"SHOW FULL COLUMNS FROM `klinik`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.049318;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4595808;}i:37;a:6:{i:0;s:599:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik' AND kcu.table_name = 'klinik'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.049669;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4602520;}i:38;a:6:{i:0;s:599:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik' AND kcu.table_name = 'klinik'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.051098;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4603608;}i:40;a:6:{i:0;s:37:"SELECT * FROM `klinik` WHERE `id`='1'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.051521;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4602760;}i:41;a:6:{i:0;s:37:"SELECT * FROM `klinik` WHERE `id`='1'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.053296;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4604080;}i:43;a:6:{i:0;s:78:"SELECT count(*) FROM `klinik_map` WHERE id_klinik='1' and tanggal='2017-09-04'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.053615;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:92;s:8:"function";s:11:"queryScalar";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4606120;}i:44;a:6:{i:0;s:78:"SELECT count(*) FROM `klinik_map` WHERE id_klinik='1' and tanggal='2017-09-04'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.057178;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:92;s:8:"function";s:11:"queryScalar";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4607016;}i:46;a:6:{i:0;s:35:"SHOW FULL COLUMNS FROM `klinik_map`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.057371;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4609912;}i:47;a:6:{i:0;s:35:"SHOW FULL COLUMNS FROM `klinik_map`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.081631;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4616480;}i:49;a:6:{i:0;s:607:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik_map' AND kcu.table_name = 'klinik_map'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.081943;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4621984;}i:50;a:6:{i:0;s:607:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik_map' AND kcu.table_name = 'klinik_map'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.082869;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4623688;}i:52;a:6:{i:0;s:140:"INSERT INTO `klinik_map` (`id_klinik`, `tanggal`, `no_antrian`, `id_pasien`, `time_exam`) VALUES (1, '2017-09-04', 'A1', 3, '08.00 - 10.00')";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1504488695.0831;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:103;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4622568;}i:53;a:6:{i:0;s:140:"INSERT INTO `klinik_map` (`id_klinik`, `tanggal`, `no_antrian`, `id_pasien`, `time_exam`) VALUES (1, '2017-09-04', 'A1', 3, '08.00 - 10.00')";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1504488695.091083;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:103;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4623392;}}}s:2:"db";a:1:{s:8:"messages";a:20:{i:22;a:6:{i:0;s:92:"SELECT * FROM `user` WHERE (`auth_key`='2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG') AND (`status`=10)";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488694.988579;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4513824;}i:23;a:6:{i:0;s:92:"SELECT * FROM `user` WHERE (`auth_key`='2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG') AND (`status`=10)";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488694.989098;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4516488;}i:25;a:6:{i:0;s:29:"SHOW FULL COLUMNS FROM `user`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488694.989951;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4549408;}i:26;a:6:{i:0;s:29:"SHOW FULL COLUMNS FROM `user`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.018231;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4561296;}i:28;a:6:{i:0;s:595:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'user' AND kcu.table_name = 'user'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.01948;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4574960;}i:29;a:6:{i:0;s:595:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'user' AND kcu.table_name = 'user'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.020391;i:4;a:1:{i:0;a:5:{s:4:"file";s:47:"C:\xampp\htdocs\advanced\common\models\User.php";s:4:"line";i:72;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4576048;}i:34;a:6:{i:0;s:31:"SHOW FULL COLUMNS FROM `klinik`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.021679;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4592112;}i:35;a:6:{i:0;s:31:"SHOW FULL COLUMNS FROM `klinik`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.049318;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4595808;}i:37;a:6:{i:0;s:599:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik' AND kcu.table_name = 'klinik'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.049669;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4602520;}i:38;a:6:{i:0;s:599:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik' AND kcu.table_name = 'klinik'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.051098;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4603608;}i:40;a:6:{i:0;s:37:"SELECT * FROM `klinik` WHERE `id`='1'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.051521;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4602760;}i:41;a:6:{i:0;s:37:"SELECT * FROM `klinik` WHERE `id`='1'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.053296;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:86;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4604080;}i:43;a:6:{i:0;s:78:"SELECT count(*) FROM `klinik_map` WHERE id_klinik='1' and tanggal='2017-09-04'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.053615;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:92;s:8:"function";s:11:"queryScalar";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4606120;}i:44;a:6:{i:0;s:78:"SELECT count(*) FROM `klinik_map` WHERE id_klinik='1' and tanggal='2017-09-04'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.057178;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:92;s:8:"function";s:11:"queryScalar";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4607016;}i:46;a:6:{i:0;s:35:"SHOW FULL COLUMNS FROM `klinik_map`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.057371;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4609912;}i:47;a:6:{i:0;s:35:"SHOW FULL COLUMNS FROM `klinik_map`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.081631;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4616480;}i:49;a:6:{i:0;s:607:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik_map' AND kcu.table_name = 'klinik_map'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.081943;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4621984;}i:50;a:6:{i:0;s:607:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'klinik_map' AND kcu.table_name = 'klinik_map'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1504488695.082869;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:102;s:8:"function";s:6:"insert";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4623688;}i:52;a:6:{i:0;s:140:"INSERT INTO `klinik_map` (`id_klinik`, `tanggal`, `no_antrian`, `id_pasien`, `time_exam`) VALUES (1, '2017-09-04', 'A1', 3, '08.00 - 10.00')";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1504488695.0831;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:103;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4622568;}i:53;a:6:{i:0;s:140:"INSERT INTO `klinik_map` (`id_klinik`, `tanggal`, `no_antrian`, `id_pasien`, `time_exam`) VALUES (1, '2017-09-04', 'A1', 3, '08.00 - 10.00')";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1504488695.091083;i:4;a:1:{i:0;a:5:{s:4:"file";s:77:"C:\xampp\htdocs\advanced\api\modules\v1\controllers\ReservationController.php";s:4:"line";i:103;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:4623392;}}}s:6:"assets";a:0:{}s:4:"mail";a:0:{}s:8:"timeline";a:3:{s:5:"start";d:1504488694.892856;s:3:"end";d:1504488695.101907;s:6:"memory";i:4736808;}s:4:"user";a:4:{s:8:"identity";a:14:{s:2:"id";i:3;s:8:"username";s:7:"gayatri";s:4:"nama";s:7:"gayatri";s:6:"no_ktp";s:10:"8736495807";s:6:"alamat";s:13:"Dalung Permai";s:5:"no_hp";s:11:"08123456788";s:8:"auth_key";s:32:"2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG";s:13:"password_hash";s:60:"$2y$13$rxgeDavhawmG10BfESA6q.wvmS.KBSfPRNUnXpFb22ZZtRMd2HgJm";s:20:"password_reset_token";N;s:5:"email";N;s:4:"role";s:6:"member";s:6:"status";i:10;s:10:"created_at";i:1502969628;s:10:"updated_at";i:1502969628;}s:10:"attributes";a:14:{i:0;s:2:"id";i:1;s:8:"username";i:2;s:4:"nama";i:3;s:6:"no_ktp";i:4;s:6:"alamat";i:5;s:5:"no_hp";i:6;s:8:"auth_key";i:7;s:13:"password_hash";i:8;s:20:"password_reset_token";i:9;s:5:"email";i:10;s:4:"role";i:11;s:6:"status";i:12;s:10:"created_at";i:13;s:10:"updated_at";}s:13:"rolesProvider";N;s:19:"permissionsProvider";N;}s:6:"router";a:1:{s:8:"messages";a:10:{i:5;a:6:{i:0;a:3:{s:4:"rule";s:3:"gii";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1504488694.929018;i:4;a:0:{}i:5;i:2818328;}i:6;a:6:{i:0;a:3:{s:4:"rule";s:12:"gii/<id:\w+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1504488694.929031;i:4;a:0:{}i:5;i:2818904;}i:7;a:6:{i:0;a:3:{s:4:"rule";s:41:"gii/<controller:[\w\-]+>/<action:[\w\-]+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1504488694.929037;i:4;a:0:{}i:5;i:2819512;}i:8;a:6:{i:0;a:3:{s:4:"rule";s:5:"debug";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1504488694.929042;i:4;a:0:{}i:5;i:2820080;}i:9;a:6:{i:0;a:3:{s:4:"rule";s:43:"debug/<controller:[\w\-]+>/<action:[\w\-]+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1504488694.929047;i:4;a:0:{}i:5;i:2820912;}i:10;a:6:{i:0;a:3:{s:4:"rule";s:24:"v1/authentications/login";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1504488694.929055;i:4;a:0:{}i:5;i:2821504;}i:11;a:6:{i:0;a:3:{s:4:"rule";s:16:"yii\rest\UrlRule";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1504488694.929062;i:4;a:0:{}i:5;i:2822048;}i:12;a:6:{i:0;s:52:"Request parsed with URL rule: v1/reservations/create";i:1;i:8;i:2;s:29:"yii\web\UrlRule::parseRequest";i:3;d:1504488694.929113;i:4;a:0:{}i:5;i:2823280;}i:13;a:6:{i:0;a:3:{s:4:"rule";s:27:"POST v1/reservations/create";s:5:"match";b:1;s:6:"parent";s:16:"yii\rest\UrlRule";}i:1;i:8;i:2;s:30:"yii\rest\UrlRule::parseRequest";i:3;d:1504488694.929125;i:4;a:0:{}i:5;i:2823536;}i:14;a:6:{i:0;a:3:{s:4:"rule";s:16:"yii\rest\UrlRule";s:5:"match";b:1;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1504488694.92913;i:4;a:0:{}i:5;i:2823808;}}}s:7:"summary";a:9:{s:3:"tag";s:13:"59acacf6e10ad";s:3:"url";s:111:"http://10.0.2.2/advanced/api/web/index.php/v1/reservations/create?access-token=2bSREf-bn1T0EhYXRBZ2oTO5qT7IbgVG";s:4:"ajax";i:0;s:6:"method";s:4:"POST";s:2:"ip";s:9:"127.0.0.1";s:4:"time";d:1504488694.881;s:10:"statusCode";i:200;s:8:"sqlCount";i:10;s:9:"mailCount";i:0;}}
