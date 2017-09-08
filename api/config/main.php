@@ -45,7 +45,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
-            'showScriptName' => true,
+            'showScriptName' => false,
             'rules' => [
                 'v1/authentications/login' => 'v1/auth/login',
                 //'v1/reservations/view' => 'v1/reservasi/show-antrian',
