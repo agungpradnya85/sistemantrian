@@ -14,14 +14,14 @@ $this->title = 'My Yii Application';
             <div class="col-lg-6">
                 <h2>Penduduk Badung</h2>
 
-                <p><?= Html::a(Html::img(Yii::getAlias('@web/img/population_hi.png'), ['width' => '150']), ['clinic/index', 'type' => 'rumahsakit']);?></p>
+                <p><?= Html::a(Html::img(Yii::getAlias('@web/img/population_hi.png'), ['width' => '150']), (null !== Yii::$app->request->get('kecamatan_id')) ? ['clinic/index', 'faskes_id' => $faskes_id, 'type' => $type, 'citizens' => 'badung', 'kecamatan_id' => Yii::$app->request->get('kecamatan_id')] : ['clinic/index', 'faskes_id' => $faskes_id, 'type' => $type]);?></p>
 
                
             </div>
             <div class="col-lg-6">
                 <h2>Penduduk Non Badung</h2>
                 <p>
-                    <?= Html::a(Html::img(Yii::getAlias('@web/img/12_Population_0.png'), ['width' => '150']), ['region/index', 'type' => 'puskesmas']); ?></p>            
+                    <?= Html::a(Html::img(Yii::getAlias('@web/img/12_Population_0.png'), ['width' => '150']), (null !== Yii::$app->request->get('kecamatan_id')) ? ['clinic/index', 'faskes_id' => $faskes_id, 'type' => $type, 'citizens' => 'nonbadung', 'kecamatan_id' => Yii::$app->request->get('kecamatan_id')] : ['clinic/index', 'faskes_id' => $faskes_id, 'type' => $type]); ?></p>            
             </div>
            
             <div class="col-lg-6">

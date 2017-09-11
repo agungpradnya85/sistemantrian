@@ -14,6 +14,6 @@ $this->title = 'Halaman Informasi Booking Antrian'
     <div><?= $model['no_antrian']; ?></div>
     <div>Perkiraan Waktu Pemeriksaan</div>
     <div><?= $model['time_exam']; ?></div>
-    <div><?=        yii\helpers\Html::a('Batal',['reservasi/cancel-reservation-member','id' => Yii::$app -> request -> get('id')]);?></div>
+    <div><?=        yii\helpers\Html::a('Batal',['reservation/cancel-reservation','id' => Yii::$app -> request -> get('id')]);?></div>
 </div>
  

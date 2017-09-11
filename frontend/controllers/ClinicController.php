@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * CitizenController implements the CRUD actions for Citizen model.
  */
-class CitizenController extends Controller
+class ClinicController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,9 +33,10 @@ class CitizenController extends Controller
      * Lists all Citizen models.
      * @return mixed
      */
-     public function actionIndex()
+     public function actionIndex($faskes_id, $citizens, $type)
     {
-        return $this->render('index', [ ]);
+        $model = \common\models\Klinik::find()->where(['id_faskes'=> $faskes_id])->all();
+        return $this->render('index', ['model' => $model ,'faskes_id' => $faskes_id, 'citizens' => $citizens, 'type' => $type ]);
     }
     /*public function actionIndex()
     {
@@ -53,76 +54,5 @@ class CitizenController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Citizen model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Citizen();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nik]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing Citizen model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nik]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Deletes an existing Citizen model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Citizen model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Citizen the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Citizen::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
+  
 }

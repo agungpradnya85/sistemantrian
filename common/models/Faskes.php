@@ -13,6 +13,7 @@ use Yii;
  * @property integer $kecamatan
  *
  * @property Kecamatan $kecamatan0
+ * @property Klinik[] $kliniks
  */
 class Faskes extends \yii\db\ActiveRecord
 {
@@ -31,8 +32,9 @@ class Faskes extends \yii\db\ActiveRecord
     {
         return [
             [['nama', 'tipe'], 'required'],
+            [['tipe'], 'string'],
             [['kecamatan'], 'integer'],
-            [['nama', 'tipe'], 'string', 'max' => 50],
+            [['nama'], 'string', 'max' => 50],
             [['kecamatan'], 'exist', 'skipOnError' => true, 'targetClass' => Kecamatan::className(), 'targetAttribute' => ['kecamatan' => 'id']],
         ];
     }
@@ -56,5 +58,13 @@ class Faskes extends \yii\db\ActiveRecord
     public function getKecamatan0()
     {
         return $this->hasOne(Kecamatan::className(), ['id' => 'kecamatan']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKliniks()
+    {
+        return $this->hasMany(Klinik::className(), ['id_faskes' => 'id']);
     }
 }

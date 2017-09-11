@@ -33,9 +33,9 @@ class CitizenController extends Controller
      * Lists all Citizen models.
      * @return mixed
      */
-     public function actionIndex()
+     public function actionIndex($type, $faskes_id)
     {
-        return $this->render('index', [ ]);
+        return $this->render('index', ['type' => $type, 'faskes_id' => $faskes_id]);
     }
     /*public function actionIndex()
     {
