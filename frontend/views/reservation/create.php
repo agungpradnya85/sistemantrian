@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Citizen */
 
-$this->title = 'Create Citizen';
-$this->params['breadcrumbs'][] = ['label' => 'Citizens', 'url' => ['index']];
+$this->title = 'Pendaftaran Pasien Non Badung';
+$this->params['breadcrumbs'][] = ['label' => 'Penduduk Non Badung', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="citizen-create">

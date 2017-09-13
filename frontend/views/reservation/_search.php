@@ -16,10 +16,11 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?php if ( Yii::$app -> request -> get('citizens') == 'nonbadung'): ?>
-    <?= Html::a('Registrasi', ['create', 'faskes_id' => $faskes_id, 'type' => $type, 'kecamatan_id' => $kecamatan_id ]) ?>
+    <?= Html::a('Pendaftaran', ['create', 'faskes_id' => $faskes_id, 'type' => $type, 'kecamatan_id' => $kecamatan_id ]) ?> 
     <?php endif ?>
     
-
+    
+    <div><h2>Pencarian data berdasar :</h2></div>
     <?= $form->field($model, 'nik') ?>
 
     <?= $form->field($model, 'nama') ?>

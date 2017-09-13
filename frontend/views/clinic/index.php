@@ -12,9 +12,9 @@ use yii\helpers\Html;
 
 
 <div class="col-md-4">
-    <h2><?= Html::a($poli->nama_klinik, (null != Yii::$app->request->get('kecamatan_id')) ? ['reservation/index', 'faskes_id' => $faskes_id, 'type' => $type, 'citizens' => $citizens, 'kecamatan_id' => Yii::$app->request->get('kecamatan_id') ]
+    <h3>Nama Poli : <?= Html::a($poli->nama_klinik, (null != Yii::$app->request->get('kecamatan_id')) ? ['reservation/index', 'faskes_id' => $faskes_id, 'type' => $type, 'citizens' => $citizens, 'kecamatan_id' => Yii::$app->request->get('kecamatan_id') ]
             : ['reservation/index', 'faskes_id' => $faskes_id, 'type' => $type,  'citizens' => $citizens, ] ); ?></h2>
-     <h2><?= Html::a($poli->jumlah_poli, ['reservation/index', ]); ?></h2>
+   <h3>Jumlah Poli : <?= $poli->jumlah_poli; ?></h2>
     <p><?= Html::img(Yii::getAlias('@web/img/hospital-clipart-hospital-png-830x747.png'),['width' => '150', 'height' => '150']); ?></p>
 </div>
 

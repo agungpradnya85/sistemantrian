@@ -11,8 +11,8 @@ use yii\helpers\Html;
 <?php foreach ($model as $faskes): ?>
 
 <div class="col-md-4">
-    <h2><?= Html::a($faskes->nama, (null !== Yii::$app->request->get('kecamatan_id')) ? ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type, 'kecamatan_id' => Yii::$app->request->get('kecamatan_id')] : ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type]); ?></h2>
-    <p><?= Html::img(Yii::getAlias('@web/img/badung.jpg'),['width' => '150', 'height' => '150']); ?></p>
+    <h3><?= Html::a($faskes->nama, (null !== Yii::$app->request->get('kecamatan_id')) ? ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type, 'kecamatan_id' => Yii::$app->request->get('kecamatan_id')] : ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type]); ?></h2>
+    <p><?= Html::img(Yii::getAlias('@web/img/logo_mangusada.png'),['width' => '150', 'height' => '150']); ?></p>
 </div>
 <?php endforeach; ?>
 

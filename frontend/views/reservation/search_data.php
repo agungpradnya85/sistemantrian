@@ -2,8 +2,8 @@
 use kartik\date\DatePicker;
 use yii\helpers\Html;
 ?>
-<B>Selamat Datang</B>  <?= $model -> nama ;?><br>
-<br> NIK : <?= $model -> nik ;?> 
+<h1>Selamat Datang <?= $model -> nama ;?></h1>
+<br><b> NIK : <?= $model -> nik ;?> 
 <br>
 <br> Pilih Tanggal Pelayanan : 
 
