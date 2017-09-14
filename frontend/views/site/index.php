@@ -5,6 +5,7 @@ use yii\helpers\Html;
 
 $this->title = 'My Yii Application';
 ?>
+<h1>Pendaftaran Pasien Online </h1>
 <div class="site-index">
 
     

@@ -176,4 +176,19 @@ class ReservationController extends Controller
             return $this -> redirect(['/site/index']);
         //}
     }
+    
+    public function actionShowReservation(){
+        $result = null;
+         if(Yii::$app->request->isPost)
+         {
+             $nik = Yii::$app->request->post('nik');
+             $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
+                 INNER JOIN (SELECT [[nik]],[[nama]] FROM {{citizen}} WHERE nik=:id_number
+                 UNION
+                select identity_number as nik, noncitizen_name as nama from noncitizen where identity_number=:id_number) AS {{all_citizen}}
+                ON {{all_citizen}}.[[nik]] = {{klinik_map}}.[[id_pasien]] WHERE {{klinik_map}}.[[id_pasien]] = :id_number AND {{klinik_map}}.[[status]]=:status";
+             $result = Yii::$app->db->createCommand($query, [':id_number' => $nik, 'status' => 1])->queryAll();
+         }
+        return $this->render('show_reservation', ['result' => $result] );
+    }
 }

@@ -8,6 +8,7 @@ use yii\helpers\Html;
 
 $this->title = 'Pendaftaran Pasien Non Badung';
 $this->params['breadcrumbs'][] = ['label' => 'Penduduk Non Badung', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Penduduk Non Badung', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="citizen-create">

@@ -34,7 +34,7 @@ class CitizenController extends Controller
      * @return mixed
      */
      public function actionIndex($type, $faskes_id)
-    {
+    {   
         return $this->render('index', ['type' => $type, 'faskes_id' => $faskes_id]);
     }
     /*public function actionIndex()

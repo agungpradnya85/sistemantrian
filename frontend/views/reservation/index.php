@@ -13,6 +13,7 @@ use yii\grid\GridView;
          $this->title = 'Penduduk Non Badung';
  endif;
 
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="citizen-index">

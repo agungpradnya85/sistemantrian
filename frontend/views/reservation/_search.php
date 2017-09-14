@@ -16,11 +16,11 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?php if ( Yii::$app -> request -> get('citizens') == 'nonbadung'): ?>
-    <?= Html::a('Pendaftaran', ['create', 'faskes_id' => $faskes_id, 'type' => $type, 'kecamatan_id' => $kecamatan_id ]) ?> 
+    <h3><?= Html::a('Pendaftaran', ['create', 'faskes_id' => $faskes_id, 'type' => $type, 'kecamatan_id' => $kecamatan_id ]) ?> </h3>
     <?php endif ?>
     
     
-    <div><h2>Pencarian data berdasar :</h2></div>
+    <div><h3>Pencarian data berdasar :</h3></div>
     <?= $form->field($model, 'nik') ?>
 
     <?= $form->field($model, 'nama') ?>
@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'alamat') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Cari Data', ['class' => 'btn btn-primary']) ?>
         
     </div>
 

@@ -8,8 +8,9 @@ use Yii;
  * This is the model class for table "noncitizen".
  *
  * @property integer $identity_number
- * @property integer $birth_date
- * @property integer $Address
+ * @property string $noncitizen_name
+ * @property string $birth_date
+ * @property string $address
  */
 class NonCitizen extends \yii\db\ActiveRecord
 {
@@ -27,8 +28,11 @@ class NonCitizen extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['identity_number', 'birth_date', 'Address'], 'required'],
-            [['identity_number', 'birth_date', 'Address'], 'integer'],
+            [['identity_number', 'noncitizen_name', 'birth_date', 'address'], 'required'],
+            [['identity_number'], 'integer'],
+            [['birth_date'], 'safe'],
+            [['noncitizen_name'], 'string', 'max' => 50],
+            [['address'], 'string', 'max' => 100],
         ];
     }
 
@@ -39,8 +43,9 @@ class NonCitizen extends \yii\db\ActiveRecord
     {
         return [
             'identity_number' => 'Identity Number',
+            'noncitizen_name' => 'Noncitizen Name',
             'birth_date' => 'Birth Date',
-            'Address' => 'Address',
+            'address' => 'Address',
         ];
     }
 }

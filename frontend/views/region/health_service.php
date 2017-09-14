@@ -6,6 +6,15 @@ use yii\helpers\Html;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$request = Yii::$app -> request;
+if ( $request -> get('type') == 'puskesmas' && $request->get('kecamatan_id')!== null): 
+    $this->params['breadcrumbs'][] = ['label' => 'Pilih Kecamatan', 'url' => ['region/index','type'=>'puskesmas']];     
+    $this->title = 'Pilih Puskesmas';
+ elseif (Yii::$app -> request -> get('type') == 'rumahsakit'):
+         $this->title = 'Pilih Rumah Sakit';
+ endif;
+
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
 <?php foreach ($model as $faskes): ?>
