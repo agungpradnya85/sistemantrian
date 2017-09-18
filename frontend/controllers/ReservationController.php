@@ -33,7 +33,7 @@ class ReservationController extends Controller
      * Lists all Citizen models.
      * @return mixed
      */
-    public function actionIndex($faskes_id , $type, $citizens, $kecamatan_id)
+    public function actionIndex($faskes_id , $type, $citizens, $kecamatan_id, $klinik_id)
     {
         $searchModel = new CitizenSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -44,7 +44,8 @@ class ReservationController extends Controller
             'citizens' => $citizens,
             'faskes_id' => $faskes_id,
             'type' => $type,
-            'kecamatan_id' => $kecamatan_id
+            'kecamatan_id' => $kecamatan_id,
+            'klinik_id' => $klinik_id
         ]);
     }
 
@@ -78,7 +79,7 @@ class ReservationController extends Controller
         }
     }
 
-    public function actionSearchData($citizens)
+    public function actionSearchData($citizens, $faskes_id, $type, $klinik_id)
     {
         
         $search = Yii::$app -> request->post('CitizenSearch');
@@ -94,11 +95,17 @@ class ReservationController extends Controller
         
         return $this->render('search_data', [
                 'model' => $model,
+                'faskes_id' => $faskes_id,
+                'type' => $type,
+                'klinik_id' => $klinik_id
+            
         ]);    
     }
     
     public function actionAdd()
     {
+        $time_start = new \DateTime( date('Y-m-d 07:00:00'));
+        $interval_queue = 15; // in minutes
         if(Yii::$app->request->post()) {
             $id_klinik = Yii::$app->request->post('klinik');
             $tanggal_layanan = Yii::$app->request->post('tanggal_layanan');
@@ -107,22 +114,33 @@ class ReservationController extends Controller
             $queryCount = "SELECT count(*) FROM `klinik_map` WHERE id_klinik=:id_klinik and tanggal=:date";
             $count = Yii::$app->db->createCommand($queryCount, [
                         ':id_klinik' => $id_klinik,
-                        ':date' => date('Y-m-d')
+                        ':date' => $tanggal_layanan
                     ])
                     ->queryScalar();
             $next_queue = $count + 1;
+            // cari pembagian
+            $divisor = floor($next_queue / $data_klinik->jumlah_poli);
+            // cari modulus
+            $mod = $next_queue % $data_klinik->jumlah_poli;
+            
+            $queue_group = ($mod === 0 ? ($divisor - 1) : $divisor) * $interval_queue;
+            $time_start->add(new \DateInterval('PT' . $queue_group . 'M'));
+            $begin_time = $time_start->format('Y-m-d H:i:s');
+            $time_start->add(new \DateInterval('PT' . $interval_queue . 'M'));
+            $end_time = $time_start->format('Y-m-d H:i:s');
+            $time_examination = $begin_time.' - '.$end_time;
             Yii::$app->db->createCommand()
                     ->insert('klinik_map', [
                         'id_klinik' => $id_klinik,
-                        'tanggal' => date('Y-m-d'),
+                        'tanggal' => $tanggal_layanan,
                         'no_antrian' => $data_klinik->kode_klinik.''.$next_queue,
                         'id_pasien' => $id_user,
-                        'time_exam' => $this->showTimeExamination($next_queue),
+                        'time_exam' => $time_examination,
                     ])->execute();
             $id = Yii::$app->db->getLastInsertID();
             return $this->redirect(['show', 'id' => $id]);
         }
-        return $this->render('menu_klinik');
+        //return $this->render('menu_klinik');
     }
     
     protected function showTimeExamination($antrian)
@@ -183,9 +201,9 @@ class ReservationController extends Controller
          {
              $nik = Yii::$app->request->post('nik');
              $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
-                 INNER JOIN (SELECT [[nik]],[[nama]] FROM {{citizen}} WHERE nik=:id_number
+                 INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
                  UNION
-                select identity_number as nik, noncitizen_name as nama from noncitizen where identity_number=:id_number) AS {{all_citizen}}
+                select identity_number as nik, noncitizen_name as nama, address as alamat from noncitizen where identity_number=:id_number) AS {{all_citizen}}
                 ON {{all_citizen}}.[[nik]] = {{klinik_map}}.[[id_pasien]] WHERE {{klinik_map}}.[[id_pasien]] = :id_number AND {{klinik_map}}.[[status]]=:status";
              $result = Yii::$app->db->createCommand($query, [':id_number' => $nik, 'status' => 1])->queryAll();
          }

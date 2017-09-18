@@ -19,7 +19,7 @@ echo Html::beginForm(['reservation/add',], 'post', ['enctype' => 'multipart/form
         ]
     ]);
     echo '<input type="hidden" name="nik" value="'.$model->nik.'">';
-    echo '<input type="hidden" name="klinik" value="1">';
+    echo '<input type="hidden" name="klinik" value="'.$klinik_id.'">';
     echo ' <br>';
     echo Html::submitButton('Ambil Nomor Antrean');
     echo Html::endForm();

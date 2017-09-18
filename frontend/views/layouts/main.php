@@ -72,9 +72,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Dinas Kesehatan Kabupaten Badung <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Dinas KOMINFO Kabupaten Badung <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">Pemerintah Kabupaten Badung</p>
     </div>
 </footer>
 

@@ -42,10 +42,10 @@ class NonCitizen extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'identity_number' => 'Identity Number',
-            'noncitizen_name' => 'Noncitizen Name',
-            'birth_date' => 'Birth Date',
-            'address' => 'Address',
+            'identity_number' => 'Nomor Identitas',
+            'noncitizen_name' => 'Nama',
+            'birth_date' => 'Tanggal Lahir',
+            'address' => 'Alamat',
         ];
     }
 }
