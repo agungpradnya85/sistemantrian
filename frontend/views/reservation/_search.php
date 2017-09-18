@@ -23,10 +23,7 @@ if(null != Yii::$app->request->get('kecamatan_id')) {
 
 <div class="citizen-search">
 
-    <?php $form = ActiveForm::begin([
-        'action' => array_merge(['search-data'], $init_link),
-        'method' => 'post',
-    ]); ?>
+    <?php   echo Html::beginForm(array_merge(['search-data'], $init_link),'get'); ?>
 
     <?php if ( Yii::$app -> request -> get('citizens') == 'nonbadung'): ?>
     <h3><?= Html::a('Pendaftaran', array_merge(['create'], $init_link)); ?> </h3>
@@ -34,9 +31,9 @@ if(null != Yii::$app->request->get('kecamatan_id')) {
     
     
     <div><h3>Pencarian data berdasar :</h3></div>
-    <?= $form->field($model, 'nik') ?>
+    <?= Html::textInput('nik', null); ?>
 
-    <?= $form->field($model, 'nama') ?>
+    <?php // $form->field($model, 'nama') ?>
 
     <?php // echo $form->field($model, 'propinsi') ?>
 
@@ -51,6 +48,6 @@ if(null != Yii::$app->request->get('kecamatan_id')) {
         
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php echo Html::endForm(); ?>
 
 </div>

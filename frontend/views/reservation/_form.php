@@ -14,10 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'identity_number')->textInput(['maxlength' => true]) ?>
 
-
     <?= $form->field($model, 'birth_date')->textInput() ?>
 
-    
+    <?= $form->field($model, 'noncitizen_name')->textInput() ?>
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 

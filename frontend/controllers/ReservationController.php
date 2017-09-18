@@ -54,12 +54,12 @@ class ReservationController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionView($id)
+   /** public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+    }*/
 
     /**
      * Creates a new Citizen model.
@@ -71,7 +71,7 @@ class ReservationController extends Controller
         $model = new \common\models\NonCitizen();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nik]);
+            return $this->redirect(['view', 'id' => $model->identity_number]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -79,11 +79,11 @@ class ReservationController extends Controller
         }
     }
 
-    public function actionSearchData($citizens, $faskes_id, $type, $klinik_id)
+    public function actionSearchData($citizens, $faskes_id, $type, $klinik_id, $nik)
     {
         
-        $search = Yii::$app -> request->post('CitizenSearch');
-        $nik = $search['nik'];
+        $search = Yii::$app -> request->get('nik');
+        $nik = $search;
         if($citizens === 'nonbadung') 
         {
                 $model = NonCitizen::find()->where(['identity_number' => $nik])
@@ -101,6 +101,8 @@ class ReservationController extends Controller
             
         ]);    
     }
+    
+  
     
     public function actionAdd()
     {
