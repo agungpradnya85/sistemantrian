@@ -12,7 +12,7 @@ $init_link = [
     'citizens' => $citizens,
     'faskes_id' => $faskes_id,
     'type' => $type,
-    'kecamatan_id' => $kecamatan_id,
+    //'kecamatan_id' => $kecamatan_id,
     'klinik_id' => $klinik_id
 ];
 if(null != Yii::$app->request->get('kecamatan_id')) {

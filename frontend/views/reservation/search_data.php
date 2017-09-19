@@ -2,8 +2,8 @@
 use kartik\date\DatePicker;
 use yii\helpers\Html;
 ?>
-<h1>Selamat Datang <?= $model -> nama ;?></h1>
-<br><b> NIK : <?= $model -> nik ;?> 
+<h1>Selamat Datang <?= $model['nama'] ;?></h1>
+<br><b> NIK : <?= $model['nik'] ;?> 
 <br>
 <br> Pilih Tanggal Pelayanan : 
 
@@ -18,7 +18,7 @@ echo Html::beginForm(['reservation/add',], 'post', ['enctype' => 'multipart/form
             'format' => 'yyyy-mm-dd'
         ]
     ]);
-    echo '<input type="hidden" name="nik" value="'.$model->nik.'">';
+    echo '<input type="hidden" name="nik" value="'.$model['nik'].'">';
     echo '<input type="hidden" name="klinik" value="'.$klinik_id.'">';
     echo ' <br>';
     echo Html::submitButton('Ambil Nomor Antrean');

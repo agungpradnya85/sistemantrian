@@ -19,6 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="citizen-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php echo $this->render('_search', ['model' => $searchModel, 'citizens' => $citizens, 'faskes_id' => $faskes_id, 'klinik_id' => $klinik_id, 'type' => $type, 'kecamatan_id' => $kecamatan_id]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel, 'citizens' => $citizens, 'faskes_id' => $faskes_id, 'klinik_id' => $klinik_id, 'type' => $type]); ?>
 
 </div>

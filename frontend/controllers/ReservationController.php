@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Citizen;
+use common\models\NonCitizen;
 use common\models\CitizenSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -33,7 +34,7 @@ class ReservationController extends Controller
      * Lists all Citizen models.
      * @return mixed
      */
-    public function actionIndex($faskes_id , $type, $citizens, $kecamatan_id, $klinik_id)
+    public function actionIndex($faskes_id , $type, $citizens, $klinik_id)
     {
         $searchModel = new CitizenSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -44,7 +45,6 @@ class ReservationController extends Controller
             'citizens' => $citizens,
             'faskes_id' => $faskes_id,
             'type' => $type,
-            'kecamatan_id' => $kecamatan_id,
             'klinik_id' => $klinik_id
         ]);
     }
@@ -66,12 +66,19 @@ class ReservationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+   // ?citizens=nonbadung&faskes_id=1&type=puskesmas&kecamatan_id=4&klinik_id=1
+    public function actionCreate($citizens, $faskes_id, $type, $kecamatan_id, $klinik_id)
     {
         $model = new \common\models\NonCitizen();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->identity_number]);
+            return $this->redirect(['reservation/search-data', 
+                'nik' => $model->identity_number,
+                'citizens'=>$citizens,
+                'faskes_id' => $faskes_id,
+                'type' => $type,
+                'kecamatan_id' => $kecamatan_id,
+                'klinik_id' => $klinik_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -86,11 +93,13 @@ class ReservationController extends Controller
         $nik = $search;
         if($citizens === 'nonbadung') 
         {
-                $model = NonCitizen::find()->where(['identity_number' => $nik])
-                -> one();
+                $query = 'SELECT [[noncitizen_name]] as [[nama]],[[identity_number]] as [[nik]] FROM {{noncitizen}} WHERE [[identity_number]]=:nik';
+              $model = Yii::$app->db->createCommand($query, [':nik' => $nik])->queryOne();
+                
         }else {
-                 $model = Citizen::find()->where(['nik' => $nik])
-                ->one();
+            $query = 'SELECT [[nama]],[[nik]] FROM {{citizen}} WHERE [[nik]]=:nik';
+              $model = Yii::$app->db->createCommand($query, [':nik' => $nik])->queryOne();
+              
         }
         
         return $this->render('search_data', [
