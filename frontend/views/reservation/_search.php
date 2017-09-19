@@ -32,7 +32,7 @@ if(null != Yii::$app->request->get('kecamatan_id')) {
     
     <div><h3>Pencarian data berdasar :</h3></div>
     <?= Html::textInput('nik', null); ?>
-
+    
     <?php // $form->field($model, 'nama') ?>
 
     <?php // echo $form->field($model, 'propinsi') ?>
@@ -42,8 +42,9 @@ if(null != Yii::$app->request->get('kecamatan_id')) {
     <?php // echo $form->field($model, 'kecamatan') ?>
 
     <?php // echo $form->field($model, 'alamat') ?>
-
+    
     <div class="form-group">
+        <br>
         <?= Html::submitButton('Cari Data', ['class' => 'btn btn-primary']) ?>
         
     </div>
