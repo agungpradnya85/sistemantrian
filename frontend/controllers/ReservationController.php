@@ -45,7 +45,8 @@ class ReservationController extends Controller
             'citizens' => $citizens,
             'faskes_id' => $faskes_id,
             'type' => $type,
-            'klinik_id' => $klinik_id
+            'klinik_id' => $klinik_id,
+           // 'kecamatan_id' => $kecamatan_id
         ]);
     }
 
@@ -67,7 +68,7 @@ class ReservationController extends Controller
      * @return mixed
      */
    // ?citizens=nonbadung&faskes_id=1&type=puskesmas&kecamatan_id=4&klinik_id=1
-    public function actionCreate($citizens, $faskes_id, $type, $kecamatan_id, $klinik_id)
+    public function actionCreate($citizens, $faskes_id, $type, $klinik_id)
     {
         $model = new \common\models\NonCitizen();
 
@@ -77,7 +78,6 @@ class ReservationController extends Controller
                 'citizens'=>$citizens,
                 'faskes_id' => $faskes_id,
                 'type' => $type,
-                'kecamatan_id' => $kecamatan_id,
                 'klinik_id' => $klinik_id]);
         } else {
             return $this->render('create', [
