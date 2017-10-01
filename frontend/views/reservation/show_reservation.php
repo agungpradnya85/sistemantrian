@@ -12,25 +12,6 @@ use yii\helpers\Html;
     
         <br>
     
-    <?php if($result !== null) :?>
-    <table>
-        <tr>
-        <th>NIK</th>
-        <th>Nama</th>
-        <th>Alamat</th>
-        <th>Aksi</th>
-        </tr>
-    
-    <?php foreach($result as $daftar_antrian) :?>
-        <tr>
-        <td><?= $daftar_antrian['nik'];?></td>
-        <td><?= $daftar_antrian['nama'];?></td>
-        <td><?= $daftar_antrian['alamat'];?></td>
-        <td><?= Html::a('batal', ['reservation/cancel-reservation', 'id' => $daftar_antrian['id']]);?></td>
-        </tr>
-    
-    <?php endforeach;?>
-    </table>
-    <?php endif; ?>
+    <?= $this->render('_reservation_history', ['result' => $result]); ?>
 
 </div>

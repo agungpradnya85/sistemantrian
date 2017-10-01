@@ -13,6 +13,7 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
     <div class="col-xs-12 col-md-4">
         <table class="table">
             <tr>
+                <th>Nama</th>
                 <th>No Antrian</th>
                 <th>Panggil Pasien</th>
                 <th>Daftarkan Pasien</th>
@@ -21,6 +22,9 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
             </tr>
             <?php foreach($model as $result) :?>
             <tr>
+                <td>
+                 <?= $result['nama']; ?>
+                </td>
                 <td>
                 <?= $result['no_antrian']; ?>
                 </td>

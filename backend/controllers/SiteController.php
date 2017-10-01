@@ -62,12 +62,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if(Yii::$app->user->identity->role === 'admin') {
+        /*if(Yii::$app->user->identity->role === 'admin') {
             return $this->render('dashboard_admin');
         }
         else {
             return $this->render('dashboard_member');
-        }
+        }*/
+        return $this->render('dashboard_admin');
         
     }
 

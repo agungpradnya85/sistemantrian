@@ -3,21 +3,34 @@
 use yii\helpers\Html;
 /* @var $this yii\web\View */
 $this->title = 'Halaman Kelola Poli';
-
+$width_pos = 0;
 ?>
 <h1><?= Html::encode($this->title); ?></h1>
 
-<div class="row" style="font-size: 20px">
-    <table class='table'><tr><th>Nama Poli</th><th>No Antrian Terakhir</th><th>No Antrian Yang Terdaftar Terakhir</th></tr>
-    <?php    foreach ($model as $result) :?>
-        <tr>
-            <td><?= Html::a($result['nama_klinik'], ['panggil-antrian', 'id' => $result['id']]); ?></td>
-            <td><?= $result['latest_queue']; ?></td>
-            <td><?= $result['current_queue']; ?></td>
-        </tr>
-    <?php    endforeach; ?>
-    </table>
+<div class="row">
+    <div style="font-size: 20px; position: relative">
+    <?php foreach($model as $poli) :?>
+    
+    <!-- faskes -->
+    
+    <div style="position:absolute; left: <?= $width_pos; ?>px">
+
+        <?= Html::a($poli[0]['nama_klinik'], ['antrian/panggil-antrian', 'id' => $poli[0]['id_klinik']]); ?>
+        <table>
+            <tr>
+                <th>No. Antrian</th>
+            </tr>
+        <?php foreach ($poli as $detail) :?>
+        
+            <tr>
+                <td><?= $detail['no_antrian']; ?></td>
+            </tr>
+        
+            
+        <?php endforeach; ?>
+            </table>
+    </div>
+    <?php $width_pos +=300; ?>
+    <?php endforeach; ?>
+    </div>
 </div>
-<tr>
-        <a href="javascript:history.go(-1)">Kembali</a>
-</tr>
