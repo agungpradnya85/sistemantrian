@@ -6,6 +6,8 @@ use Yii;
 use common\models\Citizen;
 use common\models\NonCitizen;
 use common\models\CitizenSearch;
+use common\models\Klinik;
+use common\models\KlinikMap;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -70,7 +72,7 @@ class ReservationController extends Controller
    // ?citizens=nonbadung&faskes_id=1&type=puskesmas&kecamatan_id=4&klinik_id=1
     public function actionCreate($citizens, $faskes_id, $type, $klinik_id)
     {
-        $model = new \common\models\NonCitizen();
+        $model = new NonCitizen();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['reservation/search-data', 
@@ -88,30 +90,32 @@ class ReservationController extends Controller
 
     public function actionSearchData($citizens, $faskes_id, $type, $klinik_id, $nik)
     {
-        
         $search = Yii::$app -> request->get('nik');
         $nik = $search;
+        // find Klinik Information
+        $clinicModel = Klinik::find()->where(['id' => $klinik_id])->one();
+        if($clinicModel === null)
+        {
+            throw new NotFoundHttpException('Halaman tidak ditemukan.');
+        }
         if($citizens === 'nonbadung') 
         {
-                $query = 'SELECT [[noncitizen_name]] as [[nama]],[[identity_number]] as [[nik]] FROM {{noncitizen}} WHERE [[identity_number]]=:nik';
-              $model = Yii::$app->db->createCommand($query, [':nik' => $nik])->queryOne();
+            $query = 'SELECT [[noncitizen_name]] as [[nama]],[[identity_number]] as [[nik]] FROM {{noncitizen}} WHERE [[identity_number]]=:nik';
+            $model = Yii::$app->db->createCommand($query, [':nik' => $nik])->queryOne();
                 
         }else {
             $query = 'SELECT [[nama]],[[nik]] FROM {{citizen}} WHERE [[nik]]=:nik';
-              $model = Yii::$app->db->createCommand($query, [':nik' => $nik])->queryOne();
-              
+            $model = Yii::$app->db->createCommand($query, [':nik' => $nik])->queryOne();
         }
         
         return $this->render('search_data', [
                 'model' => $model,
                 'faskes_id' => $faskes_id,
                 'type' => $type,
-                'klinik_id' => $klinik_id
-            
-        ]);    
+                'klinik_id' => $klinik_id,
+                'clinicModel' => $clinicModel
+            ]);    
     }
-    
-  
     
     public function actionAdd()
     {
@@ -119,8 +123,6 @@ class ReservationController extends Controller
         
         $interval_queue = 15; // in minutes
         if(Yii::$app->request->post()) {
-            
-            
             $id_klinik = Yii::$app->request->post('klinik');
             $tanggal_layanan = Yii::$app->request->post('tanggal_layanan');
             $id_user = Yii::$app->request->post('nik');
@@ -132,7 +134,6 @@ class ReservationController extends Controller
             else if($tanggal_layanan < date('Y-m-d')) {
                  echo json_encode(['error' => true, 'message' => 'Tanggal pelayanan yang dipilih sudah lewat']);
                 die;
-            
             }
             
             $queryCheckOnePoly = "SELECT count(*) FROM klinik_map WHERE id_pasien=:id_user AND tanggal=:tanggal_layanan AND id_klinik=:id_klinik AND `status` IN (1,2)";
@@ -148,7 +149,7 @@ class ReservationController extends Controller
             else {
                 //inisialisasi time start
                 $time_start = \DateTime::createFromFormat('Y-m-d H:i:s', "{$tanggal_layanan} 07:00:00");
-                $data_klinik = \common\models\Klinik::findOne($id_klinik);
+                $data_klinik = Klinik::findOne($id_klinik);
                 $queryCount = "SELECT count(*) FROM `klinik_map` WHERE id_klinik=:id_klinik and tanggal=:date";
                 
                 // query time exam start max dan jumlah antrian saat itu
@@ -237,11 +238,8 @@ class ReservationController extends Controller
                             $end_datetime = $start_datetime->add(new \DateInterval('PT' . $interval_queue . 'M'));
                             $end_time = $end_datetime->format('Y-m-d H:i:s');
                         }
-                        
                     }
-                    
                 }
-                //var_dump($begin_time);
                 
                 Yii::$app->db->createCommand()
                         ->insert('klinik_map', [
@@ -254,13 +252,10 @@ class ReservationController extends Controller
                             'time_exam_end' => $end_time
                         ])->execute();
                 $id = Yii::$app->db->getLastInsertID();
-                echo json_encode(['error' => false, 'message' => 'Terdaftar', 'redirect' => \yii\helpers\Url::to(['show', 'id' => $id])]);
+                echo json_encode(['error' => false, 'message' => 'Terdaftar', 'redirect' => \yii\helpers\Url::to(['show', 'id' => $id, 'identity' => $id_user])]);
                 
             //return $this->redirect(['show', 'id' => $id]);
             }
-           
-            
-            
         }
         //return $this->render('menu_klinik');
     }
@@ -288,33 +283,29 @@ class ReservationController extends Controller
         return $timeExamination;
     }
     // Ini Id yang menunjukkan id klinik map di database
-    public function actionShow($id)
+    public function actionShow($id, $identity)
     {
-        $queryCount = "SELECT * FROM `klinik_map` WHERE id=:id";
-        $model = Yii::$app->db->createCommand($queryCount, [
-                        ':id' => $id
-                    ])->queryOne();
+        $model = KlinikMap::find()->where([
+            'id' => $id,
+            'id_pasien' => $identity
+        ])->one();
+        if($model === null)
+        {
+            throw new NotFoundHttpException("Halaman tidak ditemukan.");
+        }
         return $this->render('show_antrian', ['model' => $model]);
     }
     
-    public function actionCancelReservation($id)
+    public function actionCancelReservation($id, $identity)
     {
-        //if(Yii::$app->request->post()) {
-            
-
-            //$id_user = Yii::$app->user -> identity->id;
-            //$id_klinik = Yii::$app->request->post('id_klinik');
-            //$id = Yii::$app->request->post('id');
-            $query = "UPDATE klinik_map SET [[status]] =:status WHERE id=:id";
+            $query = "UPDATE klinik_map SET [[status]] =:status WHERE id=:id AND id_pasien=:id_pasien";
             Yii::$app->db->createCommand($query, [
                     ':status' => 0,
-                    //':id_user' => $id_user,
-                    //':id_klinik' => $id_klinik,
                     ':id' => $id,
+                    ':id_pasien' => $identity
                 ])
-		->execute();
+		        ->execute();
             return $this -> redirect(['/site/index']);
-        //}
     }
     
     public function actionShowReservation(){
@@ -323,31 +314,30 @@ class ReservationController extends Controller
          {
              $nik = Yii::$app->request->post('nik');
              $tanggal_reservation = Yii::$app->request->post('tanggal_reservation');
-             
             
-             if(isset($tanggal_reservation) && $tanggal_reservation != null) {
-                 $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
-                 INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
-                 UNION
-                select identity_number as nik, noncitizen_name as nama, address as alamat from noncitizen where identity_number=:id_number) AS {{all_citizen}}
-                ON {{all_citizen}}.[[nik]] = {{klinik_map}}.[[id_pasien]] WHERE {{klinik_map}}.[[id_pasien]] = :id_number AND {{klinik_map}}.[[status]]=:status 
-                AND {{tanggal}} = :tanggal_reservation";
-                 $result = Yii::$app->db->createCommand($query, [':tanggal_reservation' => $tanggal_reservation, ':id_number' => $nik, 'status' => 1])->queryAll();
-             }
+            if(isset($tanggal_reservation) && $tanggal_reservation != null) {
+                $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
+                    INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
+                    UNION
+                    select identity_number as nik, noncitizen_name as nama, address as alamat from noncitizen where identity_number=:id_number) AS {{all_citizen}}
+                    ON {{all_citizen}}.[[nik]] = {{klinik_map}}.[[id_pasien]] WHERE {{klinik_map}}.[[id_pasien]] = :id_number AND {{klinik_map}}.[[status]]=:status 
+                    AND {{tanggal}} = :tanggal_reservation";
+                $result = Yii::$app->db->createCommand($query, [':tanggal_reservation' => $tanggal_reservation, ':id_number' => $nik, 'status' => 1])->queryAll();
+            }
              else {
-                 $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
-                 INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
-                 UNION
-                select identity_number as nik, noncitizen_name as nama, address as alamat from noncitizen where identity_number=:id_number) AS {{all_citizen}}
-                ON {{all_citizen}}.[[nik]] = {{klinik_map}}.[[id_pasien]] WHERE {{klinik_map}}.[[id_pasien]] = :id_number AND {{klinik_map}}.[[status]]=:status";
-                 $result = Yii::$app->db->createCommand($query, [':id_number' => $nik, 'status' => 1])->queryAll();
-             }
+                $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
+                    INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
+                    UNION
+                    select identity_number as nik, noncitizen_name as nama, address as alamat from noncitizen where identity_number=:id_number) AS {{all_citizen}}
+                    ON {{all_citizen}}.[[nik]] = {{klinik_map}}.[[id_pasien]] WHERE {{klinik_map}}.[[id_pasien]] = :id_number AND {{klinik_map}}.[[status]]=:status";
+                $result = Yii::$app->db->createCommand($query, [':id_number' => $nik, 'status' => 1])->queryAll();
+            }
              
-             if(Yii::$app->request->isAjax)
-             {
-                 return $this->renderPartial('_reservation_history', ['result' => $result] );
-             }
-         }
-        return $this->render('show_reservation', ['result' => $result] );
+            if(Yii::$app->request->isAjax)
+            {
+                return $this->renderPartial('_reservation_history', ['result' => $result] );
+            }
+        }
+        return $this->render('show_reservation', ['result' => $result]);
     }
 }

@@ -6,7 +6,8 @@ use yii\helpers\Html;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$this->title = 'Halaman Informasi Booking Antrian'
+$this->title = 'Halaman Informasi Booking Antrian';
+$formatter = Yii::$app->formatter;
 ?>
 <h1><?= Html::encode($this->title) ?></h1><br>
 <div style="text-align: center; font-weight: bold; font-size: 40px;">
@@ -14,7 +15,7 @@ $this->title = 'Halaman Informasi Booking Antrian'
     
     <div><?= $model['no_antrian']; ?></div>
     <div>Perkiraan Waktu Pemeriksaan</div>
-    <div><?= $model['time_exam_start']; ?> - <?= $model['time_exam_end']; ?></div> 
-    <div><?=        yii\helpers\Html::a('Batal',['reservation/cancel-reservation','id' => Yii::$app -> request -> get('id')]);?></div>
+    <div><?= $formatter->asDate($model->time_exam_start, 'php:d M Y H:i'); ?> - <?= $formatter->asDate($model->time_exam_end, 'php:d M Y H:i'); ?></div> 
+    <div><?= Html::a('Batal',['reservation/cancel-reservation','id' => Yii::$app -> request -> get('id')], ['class' => 'btn btn-primary btn-lg']);?></div>
 </div>
  
