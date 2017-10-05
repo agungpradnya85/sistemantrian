@@ -5,6 +5,7 @@ namespace backend\modules\administration\controllers;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\db\Query;
 use common\components\AppAccessRule;
 
 class AntrianController extends \yii\web\Controller
@@ -48,51 +49,27 @@ class AntrianController extends \yii\web\Controller
     
     public function actionIndex()
     {
+        // initialize 
+        // set to current date
+        $selectedDate = date('Y-m-d');
+        // get logged user info
         $user = Yii::$app->user->identity;
-        
-        /*$query = 'select klinik.*, tb_latest_queue.latest_queue, 
-            ifnull(tb_current_queue.current_queue,0) as current_queue from klinik 
-            left join (SELECT id_klinik, max(no_antrian) as latest_queue 
-                FROM `klinik_map` WHERE tanggal = :tgl GROUP BY id_klinik,tanggal) tb_latest_queue on 
-                tb_latest_queue.id_klinik = klinik.id
-            left join (SELECT id_klinik, max(no_antrian) as current_queue 
-            FROM `klinik_map` WHERE tanggal = :tgl and status=:status_terpanggil GROUP BY id_klinik,tanggal) 
-            tb_current_queue on tb_current_queue.id_klinik = klinik.id';
-        
-        if($user->role === 'operator')
-        {
-            $query .= " WHERE id_faskes = '".$user->faskes_access."'";
-        }*/
-        
-        
+
+        $query = new Query();
+        $query->select(['klinik.nama_klinik', 'klinik.id', 'klinik_map.no_antrian'])
+            ->from('klinik')
+            ->leftJoin('klinik_map', 'klinik_map.id_klinik=klinik.id and klinik_map.tanggal = :tgl', [
+                ':tgl' => $selectedDate
+            ])
+            ->orderBy(['klinik_map.id' => SORT_ASC]);
         
         if($user->role === 'operator')
         {
-            $query = "SELECT klinik.nama_klinik,klinik.id,klinik_map.no_antrian FROM klinik_map 
-INNER JOIN klinik ON klinik.id= klinik_map.id_klinik AND klinik.id_faskes=:id_faskes
-WHERE klinik_map.tanggal=:tgl
-ORDER BY klinik_map.id ASC";
-            
-            $model = Yii::$app->db->createCommand($query, [
-                ':tgl' => date('Y-m-d'),
-                ':id_faskes' => $user->faskes_access
-            ])->queryAll();
+            $query->where(['klinik.id_faskes' => $user->faskes_access]);
         }
-        else {
-            $query = "SELECT klinik.nama_klinik,klinik.id,klinik_map.no_antrian FROM klinik_map 
-INNER JOIN klinik ON klinik.id= klinik_map.id_klinik
-WHERE klinik_map.tanggal=:tgl
-ORDER BY klinik_map.id ASC";
-            
-            $model = Yii::$app->db->createCommand($query, [
-            ':tgl' => date('Y-m-d'),
-            ])->queryAll();
-        }
+
+        $model = $query->all();
         
-      /*  var_dump(Yii::$app->db->createCommand($query, [
-            ':tgl' => date('Y-m-d'),
-            ':status_terpanggil' => 2
-            ])->rawSql);*/
         $results = [];
         foreach($model as $iterasi) {
             $results[$iterasi['id']][] = [
@@ -101,8 +78,7 @@ ORDER BY klinik_map.id ASC";
                 'no_antrian' => $iterasi['no_antrian']
             ];
         }
-        
-         //var_dump($model);die;
+
         return $this->render('index', ['model' => $results]);
     }
     
