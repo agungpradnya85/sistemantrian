@@ -75,6 +75,7 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+<script src='//vws.responsivevoice.com/v/e?key=tgGFjPex'></script>
 </body>
 </html>
 <?php $this->endPage() ?>

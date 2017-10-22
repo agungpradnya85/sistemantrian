@@ -51,12 +51,18 @@ class AntrianController extends \yii\web\Controller
     {
         // initialize 
         // set to current date
-        $selectedDate = date('Y-m-d');
+        $selectedDate = (Yii::$app->request->get('selected_date') !== null) ? Yii::$app->request->get('selected_date') : date('Y-m-d');
         // get logged user info
         $user = Yii::$app->user->identity;
 
         $query = new Query();
-        $query->select(['klinik.nama_klinik', 'klinik.id', 'klinik_map.no_antrian'])
+        $query->select([
+                'klinik.nama_klinik',
+                'klinik.id',
+                'klinik_map.no_antrian',
+                'klinik_map_id' => 'klinik_map.id',
+                'status_antrian' => 'klinik_map.status'
+            ])
             ->from('klinik')
             ->leftJoin('klinik_map', 'klinik_map.id_klinik=klinik.id and klinik_map.tanggal = :tgl', [
                 ':tgl' => $selectedDate
@@ -75,11 +81,13 @@ class AntrianController extends \yii\web\Controller
             $results[$iterasi['id']][] = [
                 'nama_klinik' => $iterasi['nama_klinik'],
                 'id_klinik' => $iterasi['id'],
-                'no_antrian' => $iterasi['no_antrian']
+                'no_antrian' => $iterasi['no_antrian'],
+                'id_klinik_map' => $iterasi['klinik_map_id'],
+                'status_antrian' => $this->setAntreanStatus($iterasi['status_antrian'])
             ];
         }
 
-        return $this->render('index', ['model' => $results]);
+        return $this->render('index', ['model' => $results, 'selectedDate' => $selectedDate]);
     }
     
     public function actionRestIndex()
@@ -125,7 +133,7 @@ WHERE tanggal=:tgl AND id_klinik=:id_klinik ';
      * id adalah id si tabel klinik_map
      * status adalah field status
      */
-    public function actionUpdateAntrian($id, $status, $id_klinik)
+    public function actionUpdateAntrian($id, $status, $id_klinik, $selected_date = null)
     {
         $query = "UPDATE klinik_map SET status=:status WHERE id=:id AND id_klinik=:id_klinik";
         $model = Yii::$app->db->createCommand($query, [
@@ -133,8 +141,18 @@ WHERE tanggal=:tgl AND id_klinik=:id_klinik ';
             ':id' => $id,
             ':id_klinik' => $id_klinik
         ])->execute();
-        return $this->redirect(['index']);
+        return ($selected_date !== null) ? $this->redirect(['index', 'selected_date' => $selected_date]) : $this->redirect(['index']);
         //return $this->redirect(['panggil-antrian', 'id' => $id_klinik]);
     }
 
+    private function setAntreanStatus($status)
+    {
+        $txtStatus = 'Aktif';
+        switch ($status) {
+            case 0 : $txtStatus = 'Dibatalkan'; break;
+            case 2 : $txtStatus = 'Terdaftar'; break;
+            default : break;
+        }
+        return $txtStatus;
+    }
 }
