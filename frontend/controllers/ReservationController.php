@@ -8,6 +8,7 @@ use common\models\NonCitizen;
 use common\models\CitizenSearch;
 use common\models\Klinik;
 use common\models\KlinikMap;
+use common\models\services\ReservationService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -48,28 +49,16 @@ class ReservationController extends Controller
             'faskes_id' => $faskes_id,
             'type' => $type,
             'klinik_id' => $klinik_id,
-           // 'kecamatan_id' => $kecamatan_id
+            // 'kecamatan_id' => $kecamatan_id
         ]);
     }
-
-    /**
-     * Displays a single Citizen model.
-     * @param string $id
-     * @return mixed
-     */
-   /** public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }*/
 
     /**
      * Creates a new Citizen model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-   // ?citizens=nonbadung&faskes_id=1&type=puskesmas&kecamatan_id=4&klinik_id=1
+    // ?citizens=nonbadung&faskes_id=1&type=puskesmas&kecamatan_id=4&klinik_id=1
     public function actionCreate($citizens, $faskes_id, $type, $klinik_id)
     {
         $model = new NonCitizen();
@@ -116,12 +105,9 @@ class ReservationController extends Controller
                 'clinicModel' => $clinicModel
             ]);    
     }
-    
+
     public function actionAdd()
     {
-        //$time_start = new \DateTime( date('Y-m-d 07:00:00'));
-        
-        $interval_queue = 15; // in minutes
         if(Yii::$app->request->post()) {
             $id_klinik = Yii::$app->request->post('klinik');
             $tanggal_layanan = Yii::$app->request->post('tanggal_layanan');
@@ -135,153 +121,21 @@ class ReservationController extends Controller
                  echo json_encode(['error' => true, 'message' => 'Tanggal pelayanan yang dipilih sudah lewat']);
                 die;
             }
+
+            $reservationService = new ReservationService($id_klinik, $tanggal_layanan, $id_user);
             
-            $queryCheckOnePoly = "SELECT count(*) FROM klinik_map WHERE id_pasien=:id_user AND tanggal=:tanggal_layanan AND id_klinik=:id_klinik AND `status` IN (1,2)";
-            $countCheckOnePoly = Yii::$app->db->createCommand($queryCheckOnePoly, [
-                        ':id_user' => $id_user,
-                        ':tanggal_layanan' => $tanggal_layanan,
-                        ':id_klinik' => $id_klinik
-                    ])
-                    ->queryScalar();
-            if (($countCheckOnePoly) > 0) {
+            if($reservationService->checkIsAvailableReservation() === false)
+            {
                 echo json_encode(['error' => true, 'message' => 'Cek kembali riwayat pesanan antrean anda']);
             }
             else {
-                //inisialisasi time start
-                $time_start = \DateTime::createFromFormat('Y-m-d H:i:s', "{$tanggal_layanan} 07:00:00");
-                $data_klinik = Klinik::findOne($id_klinik);
-                $queryCount = "SELECT count(*) FROM `klinik_map` WHERE id_klinik=:id_klinik and tanggal=:date";
-                
-                // query time exam start max dan jumlah antrian saat itu
-                $queryCountMaxTimeStartQuery = 'SELECT id_klinik,COUNT(*) AS quota,time_exam_start  
-                    FROM 
-                    `klinik_map`
-                        WHERE DATE(time_exam_start)=:date AND id_klinik = :id_klinik
-                        GROUP BY id_klinik,time_exam_start
-                        ORDER BY time_exam_start DESC LIMIT 1';
-
-                // hitung jumlah antrian
-                $count = Yii::$app->db->createCommand($queryCount, [
-                            ':id_klinik' => $id_klinik,
-                            ':date' => $tanggal_layanan
-                        ])
-                        ->queryScalar();
-                
-                //hitung jumlah antrian max
-                $dataMaxTime = Yii::$app->db->createCommand($queryCountMaxTimeStartQuery, [
-                            ':id_klinik' => $id_klinik,
-                            ':date' => $tanggal_layanan
-                        ])
-                        ->queryOne();
-                
-                $next_queue = (int)$count + 1;
-                
-                
-                /* jika tidak ada $dataMaxTime yang return array (ada data)
-                 * berarti belum ada yang daftar pada saat tanggal tsb
-                 */
-                if(!is_array($dataMaxTime))
-                {
-                    $begin_time = $time_start->format('Y-m-d H:i:s');
-                    $time_start->add(new \DateInterval('PT' . $interval_queue . 'M'));
-                    $end_time = $time_start->format('Y-m-d H:i:s');
-                }
-                // jika ada
-                else {
-                    $saved_max_start_date = new \DateTime($dataMaxTime['time_exam_start']);
-                    $saved_max_end_date =$saved_max_start_date->add(new \DateInterval('PT' . $interval_queue . 'M'));
-                    
-                    // jika waktu sistem > waktu max start date
-                    if(date('Y-m-d H:i:s') > $saved_max_start_date->format('Y-m-d H:i:s'))
-                    {
-                        // cari hasil bagi dan bulatkan ke bawah
-                        $divisor = floor($saved_max_start_date->format('i') / $interval_queue);
-                        // pencarian minutes
-                        $minutes = ((($divisor - 1)<=0) ? 0 : 1) * $interval_queue;
-                        $check_start_date = new \DateTime(date('Y-m-d H:').$minutes.':00');
-                        // cek jumlah kuota yang telah terisi dengan jumlah poli
-                        // jika jumlah kuota yang terisi < jumlah poli
-                        if($dataMaxTime['quota'] < $data_klinik->jumlah_poli)
-                        {
-                            $begin_time = $check_start_date->format('Y-m-d H:i:s');
-                            $end_datetime = $check_start_date->add(new \DateInterval('PT' . $interval_queue . 'M'));
-                            $end_time = $end_datetime->format('Y-m-d H:i:s');
-                        }
-                        else {
-                            $start_datetime = $check_start_date->add(new \DateInterval('PT' . $interval_queue . 'M'));
-                            $begin_time = $start_datetime->format('Y-m-d H:i:s');
-                            $end_datetime = $start_datetime->add(new \DateInterval('PT' . $interval_queue . 'M'));
-                            $end_time = $end_datetime->format('Y-m-d H:i:s');
-                        }
-                    }
-                    else
-                    {
-                        // cari hasil bagi dan bulatkan ke bawah
-                        $divisor = floor($saved_max_start_date->format('i') / $interval_queue);
-                        // pencarian minutes
-                        $minutes = ((($divisor - 1)<=0) ? 0 : 1) * $interval_queue;
-                        $check_start_date = new \DateTime($saved_max_start_date->format('Y-m-d H:').$minutes.':00');
-                        // cek jumlah kuota yang telah terisi dengan jumlah poli
-                        // jika jumlah kuota yang terisi < jumlah poli
-                        //echo $check_start_date->format('Y-m-d H:').$minutes;
-                        if($dataMaxTime['quota'] < $data_klinik->jumlah_poli)
-                        {
-                            $begin_time = $check_start_date->format('Y-m-d H:i:s');
-                            $end_datetime = $check_start_date->add(new \DateInterval('PT' . $interval_queue . 'M'));
-                            $end_time = $end_datetime->format('Y-m-d H:i:s');
-                            
-                        }
-                        else {
-                            
-                            $start_datetime = $check_start_date->add(new \DateInterval('PT' . $interval_queue . 'M'));
-                            $begin_time = $start_datetime->format('Y-m-d H:i:s');
-                            $end_datetime = $start_datetime->add(new \DateInterval('PT' . $interval_queue . 'M'));
-                            $end_time = $end_datetime->format('Y-m-d H:i:s');
-                        }
-                    }
-                }
-                
-                Yii::$app->db->createCommand()
-                        ->insert('klinik_map', [
-                            'id_klinik' => $id_klinik,
-                            'tanggal' => $tanggal_layanan,
-                            'no_antrian' => $data_klinik->kode_klinik.''.$next_queue,
-                            'id_pasien' => $id_user,
-                            'time_exam' => '-',
-                            'time_exam_start' => $begin_time,
-                            'time_exam_end' => $end_time
-                        ])->execute();
+                Yii::$app->db->createCommand()->insert('klinik_map', $reservationService->create())->execute();
                 $id = Yii::$app->db->getLastInsertID();
                 echo json_encode(['error' => false, 'message' => 'Terdaftar', 'redirect' => \yii\helpers\Url::to(['show', 'id' => $id, 'identity' => $id_user])]);
-                
-            //return $this->redirect(['show', 'id' => $id]);
             }
         }
-        //return $this->render('menu_klinik');
     }
-    
-    protected function showTimeExamination($antrian)
-    {
-        if($antrian >= 1 && $antrian <= 12)
-        {
-            $timeExamination = '08.00 - 10.00';
-        }else if($antrian >= 13 && $antrian <= 24)
-        {
-            $timeExamination = '10.00 - 12.00';
-        }else if($antrian >= 25 && $antrian <= 36)
-        {
-            $timeExamination = '12.00 - 14.00';
-        }
-        else if($antrian >= 37 && $antrian <= 48)
-        {
-            $timeExamination = '14.00 - 16.00';
-        }
-        else if($antrian >= 49 && $antrian <= 60)
-        {
-            $timeExamination = '16.00 - 18.00';
-        }
-        return $timeExamination;
-    }
+
     // Ini Id yang menunjukkan id klinik map di database
     public function actionShow($id, $identity)
     {
@@ -298,14 +152,14 @@ class ReservationController extends Controller
     
     public function actionCancelReservation($id, $identity)
     {
-            $query = "UPDATE klinik_map SET [[status]] =:status WHERE id=:id AND id_pasien=:id_pasien";
-            Yii::$app->db->createCommand($query, [
-                    ':status' => 0,
-                    ':id' => $id,
-                    ':id_pasien' => $identity
-                ])
-		        ->execute();
-            return $this -> redirect(['/site/index']);
+        $query = "UPDATE klinik_map SET [[status]] =:status WHERE id=:id AND id_pasien=:id_pasien";
+        Yii::$app->db->createCommand($query, [
+                ':status' => 0,
+                ':id' => $id,
+                ':id_pasien' => $identity
+            ])
+            ->execute();
+        return $this -> redirect(['/site/index']);
     }
     
     public function actionShowReservation(){

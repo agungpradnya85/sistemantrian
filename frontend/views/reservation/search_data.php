@@ -91,7 +91,7 @@ $js=<<<JS
             data : jQuery("#add-reservation").serialize(),
            
             success : function(data) {
-      
+                //console.log(data);
                 if(data.error == true)
                 {
                     alert(data.message);
