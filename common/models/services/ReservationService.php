@@ -109,7 +109,7 @@ class ReservationService
             
             // jika waktu sistem > waktu max start date
             $check_start_date = (date('Y-m-d H:i:s') > $saved_max_start_date->format('Y-m-d H:i:s')) ? $this->getStartDate($saved_max_start_date, true) : $this->getStartDate($saved_max_start_date);
-
+    
             // cek jumlah kuota yang telah terisi dengan jumlah poli
             // jika jumlah kuota yang terisi < jumlah poli
             $start_datetime = ($dataMaxTime['quota'] < $data_klinik->jumlah_poli) ? $check_start_date->copy() : $check_start_date->copy()->addMinutes(self::INTERVAL_QUEUE_TIME);
@@ -133,7 +133,7 @@ class ReservationService
     private function getStartDate($dateTime, $currentTime = false)
     {
         // cari hasil bagi dan bulatkan ke bawah
-        $_dateTime = Carbon::createFromFormat('Y-m-d H:i:s', $dateTime->toDateTimeString());
+        $_dateTime = ($currentTime === true) ? Carbon::now() : Carbon::createFromFormat('Y-m-d H:i:s', $dateTime->toDateTimeString());
         $divisor = floor($_dateTime->format('i') / self::INTERVAL_QUEUE_TIME);
         // pencarian minutes
         $minutes = ($divisor) * self::INTERVAL_QUEUE_TIME;
