@@ -30,6 +30,7 @@ class NonCitizen extends \yii\db\ActiveRecord
         return [
             [['identity_number', 'noncitizen_name', 'birth_date', 'address'], 'required'],
             [['identity_number'], 'integer'],
+            [['identity_number'], 'unique'],
             [['birth_date'], 'safe'],
             [['noncitizen_name'], 'string', 'max' => 50],
             [['address'], 'string', 'max' => 100],
