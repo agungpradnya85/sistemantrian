@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use frontend\models\ReservationForm;
 use common\models\Citizen;
 use common\models\NonCitizen;
 use common\models\CitizenSearch;
@@ -12,6 +13,8 @@ use common\models\services\ReservationService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * ReservationController implements the CRUD actions for Citizen model.
@@ -58,7 +61,6 @@ class ReservationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    // ?citizens=nonbadung&faskes_id=1&type=puskesmas&kecamatan_id=4&klinik_id=1
     public function actionCreate($citizens, $faskes_id, $type, $klinik_id)
     {
         $model = new NonCitizen();
@@ -109,29 +111,29 @@ class ReservationController extends Controller
     public function actionAdd()
     {
         if(Yii::$app->request->post()) {
-            $id_klinik = Yii::$app->request->post('klinik');
-            $tanggal_layanan = Yii::$app->request->post('tanggal_layanan');
-            $id_user = Yii::$app->request->post('nik');
-            
-            if($tanggal_layanan == null) {
-                 echo json_encode(['error' => true, 'message' => 'Silahkan isi tanggal pelayanan']);
-                die;
-            }
-            else if($tanggal_layanan < date('Y-m-d')) {
-                 echo json_encode(['error' => true, 'message' => 'Tanggal pelayanan yang dipilih sudah lewat']);
-                die;
-            }
-
-            $reservationService = new ReservationService($id_klinik, $tanggal_layanan, $id_user);
-            
-            if($reservationService->checkIsAvailableReservation() === false)
-            {
-                echo json_encode(['error' => true, 'message' => 'Cek kembali riwayat pesanan antrean anda']);
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $model = new ReservationForm();
+            $model->load(Yii::$app->request->post());
+            $validate = ActiveForm::validate($model);
+            if(count($validate) > 0) {
+                return ['error' => true, 'items' => $validate];
             }
             else {
-                Yii::$app->db->createCommand()->insert('klinik_map', $reservationService->create())->execute();
-                $id = Yii::$app->db->getLastInsertID();
-                echo json_encode(['error' => false, 'message' => 'Terdaftar', 'redirect' => \yii\helpers\Url::to(['show', 'id' => $id, 'identity' => $id_user])]);
+                $id_klinik = $model->id_clinic;
+                $tanggal_layanan = $model->arrival_date;
+                $id_user = $model->identity_number;
+
+                $reservationService = new ReservationService($id_klinik, $tanggal_layanan, $id_user);
+
+                if($reservationService->checkIsAvailableReservation() === false)
+                {
+                    return ['error' => true, 'message' => 'Cek kembali riwayat pesanan antrean anda'];
+                }
+                else {
+                    Yii::$app->db->createCommand()->insert('klinik_map', $reservationService->create())->execute();
+                    $id = Yii::$app->db->getLastInsertID();
+                    return ['error' => false, 'message' => 'Terdaftar', 'redirect' => \yii\helpers\Url::to(['show', 'id' => $id, 'identity' => $id_user])];
+                }
             }
         }
     }
@@ -162,10 +164,11 @@ class ReservationController extends Controller
         return $this -> redirect(['/site/index']);
     }
     
-    public function actionShowReservation(){
+    public function actionShowReservation()
+    {
         $result = null;
-         if(Yii::$app->request->isPost)
-         {
+        if(Yii::$app->request->isPost)
+        {
              $nik = Yii::$app->request->post('nik');
              $tanggal_reservation = Yii::$app->request->post('tanggal_reservation');
             

@@ -38,22 +38,23 @@ use yii\helpers\Html;
     <label for="reservation-date" class="control-label col-sm-2 col-xs-6">Tanggal Layanan</label>
     <div class="col-sm-4 col-xs-6">
     <?= DatePicker::widget([
-            'name' => 'tanggal_layanan',
+            'name' => 'ReservationForm[arrival_date]',
             'id' => 'tanggal_layanan',
             'type' => DatePicker::TYPE_INPUT,
-            //'value' => '23-Feb-1982',
+            'value' => date('Y-m-d'),
             'options' => ['class' => 'form-control'],
             'pluginOptions' => [
                 'autoclose'=>true,
-                'format' => 'yyyy-mm-dd'
+                'format' => 'yyyy-mm-dd',
+                'startDate' => date('Y-m-d'),
             ]
         ]);
     ?>
     </div>
 </div>
 <?php
-    echo '<input type="hidden" name="nik" value="'.$model['nik'].'">';
-    echo '<input type="hidden" name="klinik" value="'.$klinik_id.'">';
+    echo '<input type="hidden" name="ReservationForm[identity_number]" value="'.$model['nik'].'">';
+    echo '<input type="hidden" name="ReservationForm[id_clinic]" value="'.$klinik_id.'">';
     echo ' <br>';
     echo Html::submitButton('Ambil Nomor Antrean', ['id' => 'save-reservation', 'class' => 'btn btn-primary']);
     echo Html::endForm();
@@ -89,12 +90,23 @@ $js=<<<JS
             url : jQuery("#add-reservation").attr("action"),
             dataType : "json",
             data : jQuery("#add-reservation").serialize(),
-           
             success : function(data) {
-                //console.log(data);
-                if(data.error == true)
-                {
-                    alert(data.message);
+                if(data.error === true) {
+                    var str = "";
+
+                    if(data.message !== undefined) {
+                        str += data.message + "\\n";
+                    }
+
+                    if(data.items !== undefined) {
+                        jQuery.each(data.items, function(a,b) {
+                            jQuery.each(b, function(index, val){
+                                str += val + "\\n";
+                            });
+                        });
+                    }
+
+                    alert(str);
                 }
                 else {
                     window.location.href = data.redirect;
