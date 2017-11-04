@@ -59,7 +59,7 @@ use yii\helpers\Html;
     echo Html::submitButton('Ambil Nomor Antrean', ['id' => 'save-reservation', 'class' => 'btn btn-primary']);
     echo Html::endForm();
     
-    echo Html::a('Tampilkan Antrean Anda', ['reservation/show-reservation', 'type' => Yii::$app->request->get('type')], ['id' => 'show-history']);
+    echo Html::a('Tampilkan Antrean Anda', ['reservation/show-reservation', 'type' => Yii::$app->request->get('type'),'id_klinik' => Yii::$app->request->get('id_klinik')], ['id' => 'show-history']);
     ?>
 <div id="history-result"></div>
 <?php
@@ -71,7 +71,7 @@ $js=<<<JS
             type : "POST",
             url : jQuery(this).attr("href"),
             dataType : "html",
-            data : {"nik" : "{$model['nik']}", "tanggal_reservation" : jQuery("#tanggal_layanan").val()},
+            data : {"id_clinic" : "{$klinik_id}", "nik" : "{$model['nik']}", "tanggal_reservation" : jQuery("#tanggal_layanan").val()},
             beforeSend:function(){
                 jQuery("#history-result").empty();
             },         

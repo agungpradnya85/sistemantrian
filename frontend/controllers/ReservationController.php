@@ -169,10 +169,16 @@ class ReservationController extends Controller
         $result = null;
         if(Yii::$app->request->isPost)
         {
-             $nik = Yii::$app->request->post('nik');
-             $tanggal_reservation = Yii::$app->request->post('tanggal_reservation');
+
+           /*  $nik = Yii::$app->request->post('nik');
+             $tanggal_reservation = Yii::$app->request->post('tanggal_reservation');*/
+
+            $nik = Yii::$app->request->post('nik');
+            $tanggal_reservasi = Yii::$app->request->post('tanggal_reservation');
+            $id_clinic = Yii::$app->request->post('id_clinic');
+
             
-            if(isset($tanggal_reservation) && $tanggal_reservation != null) {
+           /* if(isset($tanggal_reservation) && $tanggal_reservation != null) {
                 $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
                     INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
                     UNION
@@ -193,7 +199,34 @@ class ReservationController extends Controller
             if(Yii::$app->request->isAjax)
             {
                 return $this->renderPartial('_reservation_history', ['result' => $result] );
+            }*/
+             
+            $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
+            INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
+            UNION
+            select identity_number as nik, noncitizen_name as nama, address as alamat from noncitizen where identity_number=:id_number) AS {{all_citizen}}
+            ON {{all_citizen}}.[[nik]] = {{klinik_map}}.[[id_pasien]] WHERE {{klinik_map}}.[[id_pasien]] = :id_number AND {{klinik_map}}.[[status]]=:status"; 
+
+            $bindParams = [':id_number' => $nik, 'status' => 1];
+
+            // algoritma
+            // jika tanggal_reservasi diisi
+            if($tanggal_reservasi !== null) {
+                $query .= " AND {{klinik_map}}.[[tanggal]] = :tanggal_reservasi";
+                $bindParams[':tanggal_reservasi'] = $tanggal_reservasi;
             }
+
+            if($id_clinic !== null) {
+                $query .= " AND {{klinik_map}}.[[id_klinik]] = :clinic";
+                $bindParams[':clinic'] = $id_clinic;
+            }
+
+            $result = Yii::$app->db->createCommand($query, $bindParams)->queryAll(); 
+            if(Yii::$app->request->isAjax)
+            {
+                return $this->renderPartial('_reservation_history', ['result' => $result] );
+            }
+
         }
         return $this->render('show_reservation', ['result' => $result]);
     }

@@ -24,7 +24,7 @@ class ClinicController extends ActiveController
         'collectionEnvelope' => 'items',
     ];
 
-    public function behaviors()
+    /*public function behaviors()
     {
         $behaviors = parent::behaviors();
 
@@ -33,7 +33,7 @@ class ClinicController extends ActiveController
         ];
 
         return $behaviors;
-    }
+    }*/
 
     public function actions()
     {
