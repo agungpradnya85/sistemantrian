@@ -15,6 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use Carbon\Carbon;
 
 /**
  * ReservationController implements the CRUD actions for Citizen model.
@@ -130,9 +131,22 @@ class ReservationController extends Controller
                     return ['error' => true, 'message' => 'Cek kembali riwayat pesanan antrean anda'];
                 }
                 else {
-                    Yii::$app->db->createCommand()->insert('klinik_map', $reservationService->create())->execute();
-                    $id = Yii::$app->db->getLastInsertID();
-                    return ['error' => false, 'message' => 'Terdaftar', 'redirect' => \yii\helpers\Url::to(['show', 'id' => $id, 'identity' => $id_user])];
+                    $createdReservation = $reservationService->create();
+                    
+                    // check valid
+                    
+                    $timeStart = Carbon::createFromFormat('Y-m-d H:i:s', $createdReservation['time_exam_start']);
+                    $maxQueueTime = Carbon::createFromFormat('Y-m-d H:i:s', "{$timeStart->toDateString()} 17:00:00");
+                    
+                    if($timeStart >= $maxQueueTime) {
+                        return ['error' => true, 'message' => 'Anda tidak dapat melakukan reservasi di tanggal ini karena sudah penuh/kedaluarsa'];
+                    }
+                    else {
+                        Yii::$app->db->createCommand()->insert('klinik_map', $createdReservation)->execute();
+                        $id = Yii::$app->db->getLastInsertID();
+                        return ['error' => false, 'message' => 'Terdaftar', 'redirect' => \yii\helpers\Url::to(['show', 'id' => $id, 'identity' => $id_user])];
+                    }
+                    
                 }
             }
         }
