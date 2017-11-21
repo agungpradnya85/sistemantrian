@@ -15,12 +15,12 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
             <tr>
                 <th>Nama</th>
                 <th>No Antrian</th>
-                <th>Panggil Pasien</th>
-                <th>Daftarkan Pasien</th>
+                <th>Status</th>
+                <th>Tanggal</th>
                 <th>Batalkan Reservasi</th>
                 <th>
             </tr>
-            <?php foreach($model as $result) :?>
+            <?php foreach($model as $result) :?>          
             <tr>
                 <td>
                  <?= $result['nama']; ?>
@@ -29,17 +29,19 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
                 <?= $result['no_antrian']; ?>
                 </td>
                 <td>
-                <?= Html::button('Panggil') ?>
+                <?php if($result['status'] == 1): ?>
+                    Aktif
+                    <?php elseif($result['status'] == 2): ?>
+                    Terdaftar
+                    <?php else : ?>
+                    Dibatalkan
+                <?php endif ?>
+                    
                 </td>
                 <td>
-                    <!--<button class="btn">Panggil</button>
-                    <button class="btn">Set</button>-->
-                    <?php if($result['status'] != 1) :?>
-                    Daftar                  
-                    <?php else : ?>
-                    <?= Html::a('Daftar', ['update-antrian', 'id' => $result['id'], 'status' => '2', 'id_klinik' => $result['id_klinik']]); ?>
-                    <?php endif; ?>
-                </td>
+                 <?=$result['tanggal']; ?>
+                </td>            
+               
                 <td>
                 <?php if($result['status'] != 1 ):?>
                     Batal

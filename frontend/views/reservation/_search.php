@@ -30,7 +30,7 @@ if(null != Yii::$app->request->get('kecamatan_id')) {
     <?php endif ?>
     
     
-    <div><h3>Pencarian data berdasar :</h3></div>
+    <div><h3>Pencarian data berdasar NIK:</h3></div>
     <?= Html::textInput('nik', null); ?>
     
     <?php // $form->field($model, 'nama') ?>

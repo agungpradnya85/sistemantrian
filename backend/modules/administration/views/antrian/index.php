@@ -9,6 +9,8 @@ $width_pos = 0;
 $selectedDateUrl = Url::to(['index']);
 ?>
 <h1><?= Html::encode($this->title); ?></h1>
+<h3>Pilih Tanggal :</h3>
+
 <div id="date-selector">
     <?= DatePicker::widget([
             'name' => 'tanggal_layanan',
@@ -22,17 +24,24 @@ $selectedDateUrl = Url::to(['index']);
             ]
         ]);
     ?>
-    <?= Html::button('Submit', ['id' => 'submit-date']);?>
+    <br>  <?= Html::button('Tampilkan', ['id' => 'submit-date']);?>
+     <div>
+        <tr>
+          <a href="javascript:history.go(-1)">Kembali</a>
+       </tr>
+    </div>
 </div>
+<br>
 <div class="row">
     <div style="font-size: 1em; position: relative">
+        
+    <h3>Daftar Poli</h3>
     <?php foreach($model as $poli) :?>
     
     <!-- faskes -->
     
     <div style="position:absolute; left: <?= $width_pos; ?>px">
-
-        <?= Html::a($poli[0]['nama_klinik'], ['antrian/panggil-antrian', 'id' => $poli[0]['id_klinik']]); ?>
+        <?= Html::a($poli[0]['nama_klinik'], ['antrian/panggil-antrian', 'id' => $poli[0]['id_klinik'], 'selected_date'=>$selectedDate]); ?>
         <table class="table table-bordered">
             <tr>
                 <th>No. Antrian</th>
@@ -56,18 +65,22 @@ $selectedDateUrl = Url::to(['index']);
                     <?= Html::a('Daftar', ['update-antrian', 'id' => $detail['id_klinik_map'], 'status' => 2, 'id_klinik' => $detail['id_klinik']]); ?>
                     <?php else : ?>
                     <?= Html::a('Daftar', ['update-antrian', 'selected_date' => $selectedDate, 'id' => $detail['id_klinik_map'], 'status' => 2, 'id_klinik' => $detail['id_klinik']]); ?>
-                    <?php endif; ?></td>
-                
+                    <?php endif; ?></td>              
             </tr>
-            <?php endif; ?>
-            
+            <?php endif; ?>          
         <?php endforeach; ?>
             </table>
     </div>
+    
     <?php $width_pos +=350; ?>
+   
     <?php endforeach; ?>
-    </div>
+       
+    </div>  
+   
 </div>
+
+
 <?php
 $js=<<<JS
 jQuery('#submit-date').on('click', function(e){
@@ -76,3 +89,5 @@ jQuery('#submit-date').on('click', function(e){
 JS;
 $this->registerJs($js);
 ?>
+
+

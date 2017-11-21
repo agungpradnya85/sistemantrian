@@ -58,7 +58,6 @@ use yii\helpers\Html;
     echo ' <br>';
     echo Html::submitButton('Ambil Nomor Antrean', ['id' => 'save-reservation', 'class' => 'btn btn-primary']);
     echo Html::endForm();
-    
     echo Html::a('Tampilkan Antrean Anda', ['reservation/show-reservation', 'type' => Yii::$app->request->get('type'),'id_klinik' => Yii::$app->request->get('id_klinik')], ['id' => 'show-history']);
     ?>
 <div id="history-result"></div>

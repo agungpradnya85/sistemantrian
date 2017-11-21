@@ -112,8 +112,9 @@ class AntrianController extends \yii\web\Controller
 
     /*
      * id adalah id klinik di tabel map_klinik;
+     * menampilkan data poli berdasarkan inputan tanggal dan id klinik;
      */
-    public function actionPanggilAntrian($id)
+    public function actionPanggilAntrian($id, $selected_date)
     {
         $klinik = \common\models\Klinik::findOne($id);
         $query = 'SELECT * FROM klinik_map LEFT JOIN
@@ -122,8 +123,9 @@ UNION
 SELECT identity_number AS nik, noncitizen_name AS nama FROM noncitizen) AS g) AS all_citizen ON all_citizen.nik=klinik_map.id_pasien
 WHERE tanggal=:tgl AND id_klinik=:id_klinik ';
         
+        
         $model = Yii::$app->db->createCommand($query, [
-            ':tgl' => date('Y-m-d'),
+            ':tgl' => $selected_date,
             ':id_klinik' => $id,
             ])->queryAll();
         return $this->render('panggil_antrian', ['model' => $model,'klinik' => $klinik]);
