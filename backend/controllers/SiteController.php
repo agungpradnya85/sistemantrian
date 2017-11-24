@@ -133,6 +133,7 @@ class SiteController extends Controller
             $user->alamat = $model->alamat;
             $user->no_hp = $model->no_hp;
             $user->no_ktp = $model->no_ktp;
+            $user->faskes_access = $model->faskes_access;
             $user->setPassword($model->password);
             $user->generateAuthKey();
             //$errors = \yii\widgets\ActiveForm::validate($user);

@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = 'Daftar Operator';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
@@ -29,6 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'no_ktp')->textInput() ?>
             
             <?= $form->field($model, 'no_hp')->textInput() ?>
+            
+            <?= $form->field($model,'faskes_access')->textInput() ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 

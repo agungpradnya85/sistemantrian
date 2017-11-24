@@ -16,6 +16,7 @@ class SignupForm extends Model
      public  $no_hp;
       public  $alamat;
        public  $no_ktp;
+       public $faskes_access;
 
 
     /**
@@ -37,7 +38,7 @@ class SignupForm extends Model
             //['email', 'email'],
             //['email', 'string', 'max' => 255],
             //['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
+            ['faskes_access', 'required'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
         ];
@@ -61,6 +62,7 @@ class SignupForm extends Model
         $user->alamat = $this->alamat;
         $user->no_hp = $this->no_hp;
         $user->no_ktp = $this->no_ktp;
+        $user->faskes_access = $this->faskes_access;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         
