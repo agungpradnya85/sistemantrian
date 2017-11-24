@@ -186,4 +186,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+    
+    public function getIdFaskes()
+    {
+        return $this->hasOne(Faskes::className(), ['id' => 'faskes_access']);
+    }
 }

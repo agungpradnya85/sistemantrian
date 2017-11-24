@@ -10,7 +10,7 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
 ?>
 <h1><?= Html::encode($this->title); ?></h1>
 <div class="row">
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-md-6">
         <table class="table">
             <tr>
                 <th>Nama</th>

@@ -118,3 +118,9 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+.faskes_name{
+    font-size: 33px;
+    font-weight: bold;
+}
