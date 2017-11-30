@@ -10,10 +10,11 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
 ?>
 <h1><?= Html::encode($this->title); ?></h1>
 <div class="row">
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-md-12">
         <table class="table">
             <tr>
                 <th>Nama</th>
+                <th>NIK</th>
                 <th>No Antrian</th>
                 <th>Status</th>
                 <th>Tanggal</th>
@@ -24,6 +25,9 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
             <tr>
                 <td>
                  <?= $result['nama']; ?>
+                </td>
+                <td>
+                 <?= $result['id_pasien']; ?>
                 </td>
                 <td>
                 <?= $result['no_antrian']; ?>
