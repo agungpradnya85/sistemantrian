@@ -59,6 +59,7 @@ if (Yii::$app->controller->action->id === 'login') {
     </div>
 
     <?php $this->endBody() ?>
+        <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
     </body>
     </html>
     <?php $this->endPage() ?>

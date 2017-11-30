@@ -17,7 +17,7 @@ class SignupForm extends Model
       public  $alamat;
        public  $no_ktp;
        public $faskes_access;
-
+       public $role;
 
     /**
      * @inheritdoc
@@ -65,6 +65,8 @@ class SignupForm extends Model
         $user->faskes_access = $this->faskes_access;
         $user->setPassword($this->password);
         $user->generateAuthKey();
+        $user->role = "operator";
+        
         
         return $user->save() ? $user : null;
     }
