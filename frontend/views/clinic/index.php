@@ -20,7 +20,8 @@ use yii\helpers\Html;
 <div class="col-md-4">
     <h3>Nama Poli : <?= Html::a($poli->nama_klinik, array_merge($init_link, ['klinik_id' => $poli->id])); ?></h3>
     <h3>Jumlah Poli : <?= $poli->jumlah_poli; ?></h3>
-    <p><?= Html::img(Yii::getAlias('@web/img/hospital-clipart-hospital-png-830x747.png'),['width' => '150', 'height' => '150']); ?></p>
+    <br>
+    <p><?= Html::a(Html::img(Yii::getAlias('@web/img/stetoskop.png'),['width' => '170', 'height' => '170']), array_merge($init_link, ['klinik_id' => $poli->id])); ?></p>
 </div>
 
 <?php endforeach; ?>

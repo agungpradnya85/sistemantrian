@@ -13,13 +13,15 @@ $this->title = 'My Yii Application';
 
         <div class="row">
             <div class="col-lg-6">
+                <br>
                 <h2>Rumah Sakit</h2>
-                <p><?= Html::a(Html::img('http://www.datatempat.com/wp-content/uploads/2017/02/RSUD-Kab.-Badung-Mangusada.jpg', ['width' => '300' , 'height' => '220']), ['region/health-service', 'type' => 'rumahsakit']);?></p>              
+                <p><?= Html::a(Html::img(Yii::getAlias('@web/img/hospital-red.jpg'), ['width' => '180' , 'height' => '180']), ['region/health-service', 'type' => 'rumahsakit']);?></p>              
             </div>
             <div class="col-lg-6">
+                <br>
                 <h2>Puskesmas</h2>
                 <p>
-                    <?= Html::a(Html::img('https://www.dikes.badungkab.go.id/assets/album/Puskesmas-Kuta-Utara_777923.jpg', ['width' => '300', 'height' => '220']), ['region/index', 'type' => 'puskesmas']); ?></p>               
+                    <?= Html::a(Html::img(Yii::getAlias('@web/img/puskesmas.png'), ['width' => '180', 'height' => '180']), ['region/index', 'type' => 'puskesmas']); ?></p>               
             </div>
            
         </div>

@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php foreach ($model as $faskes): ?>
 
 <div class="col-md-4">
-    <h3><?= Html::a($faskes->nama, (null !== Yii::$app->request->get('kecamatan_id')) ? ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type, 'kecamatan_id' => Yii::$app->request->get('kecamatan_id')] : ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type]); ?></h2>
-    <p><?= Html::img(Yii::getAlias('@web/img/logo_mangusada.png'),['width' => '150', 'height' => '150']); ?></p>
+    <h3><?= Html::a($faskes->nama, (null !== Yii::$app->request->get('kecamatan_id')) ? ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type, 'kecamatan_id' => Yii::$app->request->get('kecamatan_id')] : ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type]); ?></h2>   
+    <p><?= Html::a(Html::img(Yii::getAlias('@web/img/hospital-icon.png'),['width' => '130', 'height' => '130']),(null !== Yii::$app->request->get('kecamatan_id')) ? ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type, 'kecamatan_id' => Yii::$app->request->get('kecamatan_id')] : ['citizen/index', 'faskes_id' => $faskes->id, 'type' => $type] ); ?></p>
 </div>
 <?php endforeach; ?>
 
