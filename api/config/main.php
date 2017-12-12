@@ -84,6 +84,17 @@ return [
                         //'POST update' => 'update',
                     ],
                 ],
+                [
+                    'pluralize' => false,
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'v1/faskes',
+                    'tokens' => [
+                        '{id}' => '<id:\\w+>'
+                    ],
+                    'extraPatterns' => [
+                        'GET search' => 'search',
+                    ],
+                ],
             ], 
         ]
     ],

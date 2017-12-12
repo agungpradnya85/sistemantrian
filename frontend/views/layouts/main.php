@@ -37,15 +37,15 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+       // ['label' => 'About', 'url' => ['/site/about']],
+      //  ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+      //  $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+      //  $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
+        //    . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
@@ -72,9 +72,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Dinas KOMINFO Kabupaten Badung <?= date('Y') ?></p>
+        <b><p class="pull-left">&copy; Dinas Kesehatan Kabupaten Badung <?= date('Y') ?></p></b>
 
-        <p class="pull-right">Pemerintah Kabupaten Badung</p>
+        <b><p class="pull-right">Pemerintah Kabupaten Badung</p><b>
     </div>
 </footer>
 

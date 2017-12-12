@@ -18,6 +18,7 @@ use Yii;
  */
 class Klinik extends \yii\db\ActiveRecord
 {
+    public $name;
     /**
      * @inheritdoc
      */

@@ -8,7 +8,7 @@ $this->title = 'Halaman Kelola Poli';
 $width_pos = 0;
 $selectedDateUrl = Url::to(['index']);
 ?>
-<h1><?= Html::encode($this->title); ?></h1>
+<!-- <h1><?= Html::encode($this->title); ?></h1> -->
 <h3>Pilih Tanggal :</h3>
 
 <div id="date-selector">
@@ -24,7 +24,7 @@ $selectedDateUrl = Url::to(['index']);
             ]
         ]);
     ?>
-    <br>  <?= Html::button('Tampilkan', ['id' => 'submit-date']);?>
+    <br>  <?= Html::button('Tampilkan', ['id' => 'submit-date', 'class' => 'btn btn-primary']);?>
      <div>
         <tr>
           <a href="javascript:history.go(-1)">Kembali</a>

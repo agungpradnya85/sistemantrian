@@ -221,7 +221,7 @@ use yii\helpers\Html;
                             </ul>
                         </li>
                         <li class="footer">
-                            <a href="#">View all tasks</a>
+                            <a href="#">View all tasks</Abouta>
                         </li>
                     </ul>
                 </li>

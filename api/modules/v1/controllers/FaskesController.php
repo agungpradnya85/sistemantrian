@@ -2,7 +2,7 @@
 
 namespace api\modules\v1\controllers;
 
-use common\models\Klinik;
+use common\models\Faskes;
 use yii\rest\ActiveController;
 use yii\filters\ContentNegotiator;
 use yii\web\Response;
@@ -13,11 +13,10 @@ use yii\data\ActiveDataProvider;
 /**
  * Country Controller API
  *
- * @author Made Saguna <made.saguna@hotmail.com>
  */
-class ClinicController extends ActiveController
+class FaskesController extends ActiveController
 {
-    public $modelClass = 'common\models\Klinik';
+    public $modelClass = 'common\models\Faskes';
 
     public $serializer = [
         'class' => 'yii\rest\Serializer',
@@ -50,11 +49,11 @@ class ClinicController extends ActiveController
 
     public function actionIndex()
     {
-        $model = Klinik::find()->select(['id', 'nama_klinik']);
+        $model = Faskes::find()->select(['id', 'nama']);
         $provider = new ActiveDataProvider([
             'query' => $model,
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 2000,
             ],
         ]);
 

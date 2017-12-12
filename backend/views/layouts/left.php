@@ -31,7 +31,7 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Menu Administrator', 'options' => ['class' => 'header']],
-                    ['label' => 'Kelola Poli', 'icon' => 'file-code-o', 'url' => ['/gii']],
+                    ['label' => 'Kelola Poli', 'icon' => 'file-code-o', 'url' => ['/administration/antrian/index']],
                    /* ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],*/
                    /* ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
