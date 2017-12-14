@@ -8,7 +8,6 @@ use yii\helpers\Html;
  */
 $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
 ?>
-<h1><?= Html::encode($this->title); ?></h1>
 <div class="row">
     <div class="col-xs-12 col-md-12">
         <table class="table">
@@ -17,11 +16,12 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
                 <th>NIK</th>
                 <th>No Antrian</th>
                 <th>Status</th>
-                <th>Tanggal</th>
+                <th>Waktu Mulai</th>
+                <th>Waktu Selesai</th>
                 <th>Batalkan Reservasi</th>
                 <th>
             </tr>
-            <?php foreach($model as $result) :?>          
+            <?php foreach($model as $result) :?> 
             <tr>
                 <td>
                  <?= $result['nama']; ?>
@@ -39,13 +39,14 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
                     Terdaftar
                     <?php else : ?>
                     Dibatalkan
-                <?php endif ?>
-                    
+                <?php endif ?>                 
+                </td>           
+               <td>
+                 <?=$result['time_exam_start']; ?>
                 </td>
-                <td>
-                 <?=$result['tanggal']; ?>
-                </td>            
-               
+                 <td>
+                 <?=$result['time_exam_end']; ?>
+                </td> 
                 <td>
                 <?php if($result['status'] != 1 ):?>
                     Batal
@@ -57,8 +58,9 @@ $this->title = 'Halaman Kelola Antrian '.$klinik -> nama_klinik;
             <?php    endforeach; ?>
             
         </table>
-        <tr>
+   
+</div>
+         <tr>
                <a href="javascript:history.go(-1)">Kembali</a>
         </tr>
-</div>
 </div>

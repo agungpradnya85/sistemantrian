@@ -25,11 +25,7 @@ $selectedDateUrl = Url::to(['index']);
         ]);
     ?>
     <br>  <?= Html::button('Tampilkan', ['id' => 'submit-date', 'class' => 'btn btn-primary']);?>
-     <div>
-        <tr>
-          <a href="javascript:history.go(-1)">Kembali</a>
-       </tr>
-    </div>
+     
 </div>
 <br>
 <div class="row">
@@ -72,14 +68,11 @@ $selectedDateUrl = Url::to(['index']);
             </table>
     </div>
     
-    <?php $width_pos +=350; ?>
-   
-    <?php endforeach; ?>
-       
+    <?php $width_pos +=350; ?>  
+    <?php endforeach; ?>     
     </div>  
    
 </div>
-
 
 <?php
 $js=<<<JS
@@ -91,3 +84,5 @@ $this->registerJs($js);
 ?>
 
 
+ 
+  
