@@ -29,16 +29,16 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'E-Health Pemerintah Kabupaten Badung',
+        'brandLabel' => 'Sistem Antrian Pemerintah Kabupaten Badung',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-       // ['label' => 'About', 'url' => ['/site/about']],
-      //  ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Home', 'url' => ['/site/service']],
+        ['label' => 'Kelola', 'url' => ['/reservation/index']],
+       // ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
       //  $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];

@@ -12,6 +12,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css',
         'css/site.css',
     ];
     public $js = [

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="col-md-4">
     <h3><?= Html::a($kecamatan->nama, ['health-service', 'kecamatan_id' => $kecamatan->id, 'type' => $type]); ?></h3>
-    <p><?= Html::a(Html::img(Yii::getAlias('@web/img/bed-hospital.png'),['width' => '150', 'height' => '150']), ['health-service', 'kecamatan_id' => $kecamatan->id, 'type' => $type]); ?></p>
+    <p><?= Html::a(Html::img(Yii::getAlias('@web/img/iconpuskesmaskecamatan.png'),['width' => '150', 'height' => '150']), ['health-service', 'kecamatan_id' => $kecamatan->id, 'type' => $type]); ?></p>
 </div>
 
 <?php endforeach; ?>

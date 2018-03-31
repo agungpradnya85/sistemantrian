@@ -1,10 +1,9 @@
 <?php
 
-namespace frontend\controllers;
+namespace frontend\modules\kiosk\controllers;
 
 use Yii;
 use frontend\models\ReservationForm;
-use common\models\Citizen;
 use common\models\NonCitizen;
 use common\models\CitizenSearch;
 use common\models\Klinik;
@@ -16,6 +15,7 @@ use yii\filters\VerbFilter;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use Carbon\Carbon;
+use common\models\KlinikKonfirmasi;
 
 /**
  * ReservationController implements the CRUD actions for Citizen model.
@@ -46,7 +46,7 @@ class ReservationController extends Controller
         $searchModel = new CitizenSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('@frontend/views/reservation/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'citizens' => $citizens,
@@ -74,7 +74,7 @@ class ReservationController extends Controller
                 'type' => $type,
                 'klinik_id' => $klinik_id]);
         } else {
-            return $this->render('create', [
+            return $this->render('@frontend/views/reservation/create', [
                 'model' => $model,
             ]);
         }
@@ -86,6 +86,7 @@ class ReservationController extends Controller
         $nik = $search;
         // find Klinik Information
         $clinicModel = Klinik::find()->where(['id' => $klinik_id])->one();
+      
         if($clinicModel === null)
         {
             throw new NotFoundHttpException('Halaman tidak ditemukan.');
@@ -108,47 +109,54 @@ class ReservationController extends Controller
                 'clinicModel' => $clinicModel
             ]);    
     }
-    
-    //Untuk insert data ke table klinik_map
+
     public function actionAdd()
-    {
+    {  
         if(Yii::$app->request->post()) {
             Yii::$app->response->format = Response::FORMAT_JSON;
-            $model = new ReservationForm();
+            $model = new \common\models\KlinikKonfirmasi();
+            $model->scenario = 'kiosk_validation';
             $model->load(Yii::$app->request->post());
             $validate = ActiveForm::validate($model);
             if(count($validate) > 0) {
                 return ['error' => true, 'items' => $validate];
             }
             else {
-                $id_klinik = $model->id_clinic;
-                $tanggal_layanan = $model->arrival_date;
-                $id_user = $model->identity_number;
-
-                $reservationService = new ReservationService($id_klinik, $tanggal_layanan, $id_user);
-
-                if($reservationService->checkIsAvailableReservation() === false)
-                {
-                    return ['error' => true, 'message' => 'Cek kembali riwayat pesanan antrean anda'];
-                }
-                else {
-                    $createdReservation = $reservationService->create();
-                    
-                    // check valid               
-                    $timeStart = Carbon::createFromFormat('Y-m-d H:i:s', $createdReservation['time_exam_start']);
-                    $maxQueueTime = Carbon::createFromFormat('Y-m-d H:i:s', "{$timeStart->toDateString()} 17:00:00");
-                    
-                    if($timeStart >= $maxQueueTime) {
-                        return ['error' => true, 'message' => 'Anda tidak dapat melakukan reservasi di tanggal ini karena sudah penuh/kedaluarsa'];
-                    }
-                    else {
-                        Yii::$app->db->createCommand()->insert('klinik_map', $createdReservation)->execute();
-                        $id = Yii::$app->db->getLastInsertID();
-                        return ['error' => false, 'message' => 'Terdaftar', 'redirect' => \yii\helpers\Url::to(['show', 'id' => $id, 'identity' => $id_user])];
-                    }
+             //$quey = 'SELECT COUNT FROM {{klinik_konfirmasi}} WHERE id_klinik = ';
+                
+                $klinik = Klinik::find()->where(['id' => $model->id_klinik])->one();
+                $redirect = [
+                    'citizen/index',
+                    'faskes_id' => $klinik->id,
+                    'type' => $klinik->idFaskes->tipe
+                ];
+                
+                if($klinik->idFaskes->tipe === 'puskesmas') {
+                    $redirect = array_merge($redirect, ['kecamatan_id' => $klinik->idFaskes->kecamatan0->id]);
                     
                 }
+                
+                $query = new \yii\db\Query();
+                $count = $query->from('klinik_konfirmasi')
+                     ->where([
+                         'id_klinik'=>$model->id_klinik,
+                         'tanggal'=>date('Y-m-d'),
+                         'tipe_antrian' => 'kiosk'
+                      ])
+                     ->count();
+                
+                
+                $count = $count + 1;
+                \Yii::$app->db->createCommand()->insert('klinik_konfirmasi', [
+                    'id_pasien' => $model->id_pasien,
+                    'no_antrian' => $klinik->kode_klinik.'K'.$count,
+                    'id_klinik' => $model->id_klinik,
+                    'tipe_antrian' => 'kiosk',
+                    'tanggal' => date('Y-m-d'),
+                ])->execute();;
+              
             }
+            return ['error' => false, 'message' => 'Terdaftar', 'redirect' => \yii\helpers\Url::to($redirect)];
         }
     }
 
@@ -163,19 +171,7 @@ class ReservationController extends Controller
         {
             throw new NotFoundHttpException("Halaman tidak ditemukan.");
         }
-        return $this->render('show_antrian', ['model' => $model]);
-    }
-    
-    public function actionCancelReservation($id, $identity)
-    {
-        $query = "UPDATE klinik_map SET [[status]] =:status WHERE id=:id AND id_pasien=:id_pasien";
-        Yii::$app->db->createCommand($query, [
-                ':status' => 0,
-                ':id' => $id,
-                ':id_pasien' => $identity
-            ])
-            ->execute();
-        return $this -> redirect(['/site/index']);
+        return $this->render('@frontend/views/reservation/show_antrian', ['model' => $model]);
     }
     
     public function actionShowReservation()
@@ -184,36 +180,9 @@ class ReservationController extends Controller
         if(Yii::$app->request->isPost)
         {
 
-           /*  $nik = Yii::$app->request->post('nik');
-             $tanggal_reservation = Yii::$app->request->post('tanggal_reservation');*/
-
             $nik = Yii::$app->request->post('nik');
             $tanggal_reservasi = Yii::$app->request->post('tanggal_reservation');
             $id_clinic = Yii::$app->request->post('id_clinic');
-
-            
-           /* if(isset($tanggal_reservation) && $tanggal_reservation != null) {
-                $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
-                    INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
-                    UNION
-                    select identity_number as nik, noncitizen_name as nama, address as alamat from noncitizen where identity_number=:id_number) AS {{all_citizen}}
-                    ON {{all_citizen}}.[[nik]] = {{klinik_map}}.[[id_pasien]] WHERE {{klinik_map}}.[[id_pasien]] = :id_number AND {{klinik_map}}.[[status]]=:status 
-                    AND {{tanggal}} = :tanggal_reservation";
-                $result = Yii::$app->db->createCommand($query, [':tanggal_reservation' => $tanggal_reservation, ':id_number' => $nik, 'status' => 1])->queryAll();
-            }
-             else {
-                $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
-                    INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
-                    UNION
-                    select identity_number as nik, noncitizen_name as nama, address as alamat from noncitizen where identity_number=:id_number) AS {{all_citizen}}
-                    ON {{all_citizen}}.[[nik]] = {{klinik_map}}.[[id_pasien]] WHERE {{klinik_map}}.[[id_pasien]] = :id_number AND {{klinik_map}}.[[status]]=:status";
-                $result = Yii::$app->db->createCommand($query, [':id_number' => $nik, 'status' => 1])->queryAll();
-            }
-             
-            if(Yii::$app->request->isAjax)
-            {
-                return $this->renderPartial('_reservation_history', ['result' => $result] );
-            }*/
              
             $query = "SELECT {{all_citizen}}.*, {{klinik_map}}.* FROM {{klinik_map}} 
             INNER JOIN (SELECT [[nik]],[[nama]],[[alamat]] FROM {{citizen}} WHERE nik=:id_number
@@ -240,8 +209,61 @@ class ReservationController extends Controller
             {
                 return $this->renderPartial('_reservation_history', ['result' => $result] );
             }
-
         }
         return $this->render('show_reservation', ['result' => $result]);
+    }
+    
+     public function actionConfirmation()
+    {
+         //JIKA REQUEST POST
+        if(Yii::$app->request->isPost)
+        {
+            $id_ref_number = Yii::$app->request->post('refnumber');
+            $modelKlinikMap = KlinikMap::find()
+                    ->where([
+                        'no_antrian' => $id_ref_number,
+                        'tanggal' => date('Y-m-d'),
+                        'status' => 1,
+                    ])
+                    ->one();
+           
+            // jika model modelKlinikMap ada isinya
+            if(isset($modelKlinikMap->id)) {
+                $klinik = Klinik::find()->where(['id' => $modelKlinikMap->id_klinik])->one();
+                $redirect = [
+                    'citizen/index',
+                    'faskes_id' => $klinik->id,
+                    'type' => $klinik->idFaskes->tipe
+                ];
+                
+                if($klinik->idFaskes->tipe === 'puskesmas') {
+                    $redirect = array_merge($redirect, ['kecamatan_id' => $klinik->idFaskes->kecamatan0->id]);
+                    
+                }
+                //var_dump("faskes_id={$klinik->id}&type={$klinik->idFaskes->tipe}&kecamatan_id={$klinik->idFaskes->kecamatan0->id}");
+                \Yii::$app->db->createCommand()->insert('klinik_konfirmasi', [
+                       'id_pasien' => $modelKlinikMap->id_pasien,
+                       'no_antrian' => $modelKlinikMap->no_antrian,
+                       'id_klinik' => $modelKlinikMap->id_klinik,
+                       'tipe_antrian' => 'online',
+                       'tanggal' => $modelKlinikMap->tanggal,
+                   ])->execute();
+                
+                $query = "UPDATE klinik_map SET [[status]] =:status WHERE id=:id AND id_pasien=:id_pasien";
+                Yii::$app->db->createCommand($query, [
+                        ':status' => 2,
+                        ':id' => $modelKlinikMap->id,
+                        ':id_pasien' => $modelKlinikMap->id_pasien
+                    ])
+                    ->execute();
+                //var_dump($redirect);
+                $this->redirect($redirect);
+            }else {
+               echo("Antrian anda tidak terdaftar");
+            }
+        }
+        else {
+            return $this->render('confirmation');
+        }
     }
 }

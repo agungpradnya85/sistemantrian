@@ -59,15 +59,15 @@ class AntrianController extends \yii\web\Controller
         $query->select([
                 'klinik.nama_klinik',
                 'klinik.id',
-                'klinik_map.no_antrian',
-                'klinik_map_id' => 'klinik_map.id',
-                'status_antrian' => 'klinik_map.status'
+                'klinik_konfirmasi.no_antrian',
+                'klinik_map_id' => 'klinik_konfirmasi.id',
+                'status_antrian' => 'klinik_konfirmasi.status'
             ])
             ->from('klinik')
-            ->leftJoin('klinik_map', 'klinik_map.id_klinik=klinik.id and klinik_map.tanggal = :tgl', [
+            ->leftJoin('klinik_konfirmasi', 'klinik_konfirmasi.id_klinik=klinik.id and klinik_konfirmasi.tanggal = :tgl', [
                 ':tgl' => $selectedDate
             ])
-            ->orderBy(['klinik_map.id' => SORT_ASC]);
+            ->orderBy(['klinik_konfirmasi.id' => SORT_ASC]);
         
         if($user->role === 'operator')
         {

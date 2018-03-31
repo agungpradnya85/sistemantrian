@@ -122,7 +122,7 @@ class ReservationService
         return [
             'id_klinik' => $this->clinic_id,
             'tanggal' => $this->departure_date,
-            'no_antrian' => $data_klinik->kode_klinik.''.$next_queue,
+            'no_antrian' => $data_klinik->kode_klinik.'O'.$next_queue,
             'id_pasien' => $this->identity_number,
             'time_exam' => '-',
             'time_exam_start' => $begin_time,

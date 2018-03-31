@@ -71,9 +71,17 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
+    {        $this->layout='landing_page';
+    
         return $this->render('index');
     }
+    
+     public function actionService()
+    {      
+    
+        return $this->render('service');
+    }
+
 
     /**
      * Logs in a user.

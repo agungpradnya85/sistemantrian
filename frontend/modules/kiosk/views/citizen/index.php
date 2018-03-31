@@ -24,11 +24,8 @@ $this->title = 'My Yii Application';
             </div>
            
             <div class="col-lg-6">
-                <br>
-                <br>
-                <br>
                 <p>
-                    <?= Html::a(Html::img(Yii::getAlias('@web/img/batal.png'), ['width' => '170']), ['reservation/show-reservation', 'type' => 'puskesmas']); ?></p>            
+                    <?= Html::a(Html::img(Yii::getAlias('@web/img/konfirm.png'), ['width' => '200']), ['reservation/confirmation', 'type' => 'puskesmas']); ?></p>            
             </div>
         </div>
 

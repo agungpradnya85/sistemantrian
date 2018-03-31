@@ -14,8 +14,9 @@ $formatter = Yii::$app->formatter;
     <div>No Antrian</div>
     
     <div><?= $model['no_antrian']; ?></div>
+    <br>
     <div>Perkiraan Waktu Pemeriksaan</div>
     <div><?= $formatter->asDate($model->time_exam_start, 'php:d M Y H:i'); ?> - <?= $formatter->asDate($model->time_exam_end, 'php:d M Y H:i'); ?></div> 
-    <div><?= Html::a('Batal',['reservation/cancel-reservation','id' => Yii::$app -> request -> get('id')], ['class' => 'btn btn-primary btn-lg']);?></div>
+   <!-- <div><?= Html::a('Batal',['reservation/cancel-reservation','id' => Yii::$app -> request -> get('id')], ['class' => 'btn btn-primary btn-lg']);?></div> ->
 </div>
  
